@@ -1,0 +1,6 @@
+plugin:
+    name: 'zaxbux.securityheaders::lang.plugin.name'
+    description: 'zaxbux.securityheaders::lang.plugin.description'
+    author: 'Zachary Schneider'
+    icon: oc-icon-shield
+    homepage: 'https://www.zacharyschneider.ca'
