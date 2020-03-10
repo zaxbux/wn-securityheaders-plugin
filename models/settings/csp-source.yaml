@@ -1,0 +1,29 @@
+host:
+    name: zaxbux.securityheaders::lang.fields.settings.csp_source_host.name
+    description: zaxbux.securityheaders::lang.fields.settings.csp_source_host.description
+    icon: 'icon-chain'
+    fields:
+        value:
+            type: text
+            label: zaxbux.securityheaders::lang.fields.settings.csp_source_host.name
+            comment: zaxbux.securityheaders::lang.fields.settings.csp_source_host.comment
+
+scheme:
+    name: zaxbux.securityheaders::lang.fields.settings.csp_source_scheme.name
+    description: zaxbux.securityheaders::lang.fields.settings.csp_source_scheme.description
+    icon: 'icon-chain'
+    fields:
+        value:
+            type: text
+            label: zaxbux.securityheaders::lang.fields.settings.csp_source_scheme.name
+            comment: zaxbux.securityheaders::lang.fields.settings.csp_source_scheme.comment
+
+hash:
+    name: zaxbux.securityheaders::lang.fields.settings.csp_source_hash.name
+    description: zaxbux.securityheaders::lang.fields.settings.csp_source_hash.description
+    icon: 'icon-hashtag'
+    fields:
+        value:
+            type: text
+            label: zaxbux.securityheaders::lang.fields.settings.csp_source_hash.name
+            comment: zaxbux.securityheaders::lang.fields.settings.csp_source_hash.comment
