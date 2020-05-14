@@ -2,6 +2,8 @@
 
 This October CMS plugin allows you to manage a variety of security HTTP headers for your application.
 
+See your score at [securityheaders.com](https://securityheaders.com/)
+
 ## CSP Nonce
 This plugin generates a cryptographic nonce (128 bits, base64 encoded) for each HTTP response. To use the CSP nonce, enable the `'nonce'` source for a CSP directive and include the `CSPNonce` component on the layout or page you want to apply the nonce. A page variable named `csp_conce` will contain the base64 encoded nonce.
 

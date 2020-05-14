@@ -71,11 +71,7 @@ class Settings extends Model {
 
 	public function beforeValidate() {
 		if ($this->csp['block-all-mixed-content'] && $this->csp['upgrade-insecure-requests']) {
-			throw new ValidationException(['block-all-mixed-content' => 'Cannot have b-a-m-c and u-i-r at the same time']);
-		}
-
-		foreach ($this->csp as $directive => $value) {
-
+			throw new ValidationException(['block-all-mixed-content' => 'Cannot enable block-all-mixed-content and upgrade-insecure-requests at the same time']);
 		}
 	}
 
