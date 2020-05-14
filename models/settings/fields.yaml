@@ -90,6 +90,8 @@ fields:
     _section_xss_protection:
         type: section
         label: X-XSS-Protection
+        comment: '<span class="text-warning"><i class="icon-exclamation-triangle"></i> Deprecated</span>'
+        commentHtml: true
     
     xss_protection:
         type: dropdown
