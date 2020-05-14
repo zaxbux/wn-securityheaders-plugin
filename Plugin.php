@@ -1,7 +1,6 @@
 <?php namespace Zaxbux\SecurityHeaders;
 
 use Yaml;
-use Validator;
 use System\Classes\PluginBase;
 use Zaxbux\SecurityHeaders\Classes\CSPDirectives;
 
@@ -19,11 +18,6 @@ class Plugin extends PluginBase {
          */
         $this->app['Illuminate\Contracts\Http\Kernel']->prependMiddleware(Classes\NonceGeneratorMiddleware::class);
         $this->app['Illuminate\Contracts\Http\Kernel']->pushMiddleware(Classes\SecurityHeaderMiddleware::class);
-
-        /*
-         * Validation
-         */
-        Validator::extend('csp_source', Rules\CSPSource::class);
 
         /*
          * Form Fields
