@@ -30,7 +30,7 @@ class CSPDirectives {
 		'report-sample',
 	];
 
-	const LANG_PREFIX = '';
+	const LANG_PREFIX = 'zaxbux.securityheaders::lang.fields.settings.csp_';
 
 	public static function getFormConfig() {
 		$form = [];
