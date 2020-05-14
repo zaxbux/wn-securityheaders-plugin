@@ -3,7 +3,9 @@
 namespace Zaxbux\SecurityHeaders\Models;
 
 use Model;
+use Cache;
 use October\Rain\Exception\ValidationException;
+use Zaxbux\SecurityHeaders\Classes\CSPHeaderBuilder;
 
 class Settings extends Model {
 	use \October\Rain\Database\Traits\Validation;
@@ -75,5 +77,10 @@ class Settings extends Model {
 		foreach ($this->csp as $directive => $value) {
 
 		}
+	}
+
+	public function afterSave() {
+		// Remove header from cache
+		Cache::forget(CSPHeaderBuilder::CACHE_KEY);
 	}
 }

@@ -111,12 +111,19 @@ fields:
         label: Content-Security-Policy
         comment: 
     
+    csp[enabled]:
+        type: switch
+        label: zaxbux.securityheaders::lang.fields.settings.csp_enable.label
+        comment: zaxbux.securityheaders::lang.fields.settings.csp_enable.comment
+        commentHtml: true
+        span: left
+
     csp[report-only]:
         type: switch
         label: zaxbux.securityheaders::lang.fields.settings.csp_report_only.label
         comment: zaxbux.securityheaders::lang.fields.settings.csp_report_only.comment
         commentHtml: true
-        span: left
+        span: right
     
     csp[block-all-mixed-content]:
         type: checkbox

@@ -8,6 +8,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+use Zaxbux\SecurityHeaders\Classes\CSPHeaderBuilder;
 use Zaxbux\SecurityHeaders\Models\Settings;
 
 class SecurityHeaderMiddleware {
@@ -100,100 +101,11 @@ class SecurityHeaderMiddleware {
 	}
 
 	protected static function setHeader_ContentSecurityPolicy(Response $response, $nonce) {
-		$header     = '';
-		$headerName = 'Content-Security-Policy';
-
-		$policy = Settings::get('csp', []); //var_dump($policy); die();
-		foreach ($policy as $directive => $value) {
-			if (\in_array($directive, Settings::CSP_FETCH_DIRECTIVES) ||
-				$directive == 'base-uri' ||
-				$directive == 'form-action') {
-					$header .= self::formatCSPFetchDirective($directive, $value, $nonce);
-			}
-
-			if ($directive == 'plugin-types') {
-				$directiveString = '';
-
-
-				foreach ($value['types'] as $type) {
-					$directiveString .= ' '.$type['value'];
-				}
-
-				if (strlen($directiveString) > 0) {
-					$header .= sprintf('plugin-types %s; ', $directiveString);
-				}
-			}
-
-			if ($directive == 'sandbox' && $value) {
-				$header .= sprintf('sandbox %s; ', $value);
-			}
-
-			if ($directive == 'report-uri' && $value) {
-				$header .= sprintf('report-uri %s; ', $value);
-			}
-
-			if ($directive == 'upgrade-insecure-requests' && $value) {
-				$header .= 'upgrade-insecure-requests; ';
-			}
-
-			if ($directive == 'block-all-mixed-content' && $value) {
-				$header .= 'block-all-mixed-content; ';
-			}
-		}
-
-		if ($policy['report-only']) {
-			$headerName .= '-Report-Only';
-		}
+		$header = CSPHeaderBuilder::getHeader($nonce);
 
 		if ($header) {
-			$response->header($headerName, trim($header));
+			$response->header($header->name, $header->value);
 		}
-	}
-
-	protected static function formatCSPFetchDirective($directive, $sources, $nonce) {
-		$sourceString = '';
-
-		foreach ($sources as $source => $value) {
-			if (!$value) {
-				continue;
-			}
-
-			if ($source == '_sources') {
-				$sourceString .= self::formatCSPUserSource($value);
-				continue;
-			}
-
-			if ($source == 'nonce') {
-				$sourceString .= sprintf(" 'nonce-%s'", $nonce);
-				continue;
-			}
-
-			$sourceString .= sprintf(" '%s'", $source);
-		}
-
-		if (strlen($sourceString) > 0) {
-			return sprintf('%s %s; ', $directive, $sourceString);
-		}
-
-		return '';
-	}
-
-	protected static function formatCSPUserSource($sources) {
-		$directive = '';
-
-		foreach ($sources as $source) {
-			switch ($source['_group']) {
-				case 'host':
-				case 'scheme':
-					$directive .= ' '.$source['value'];
-					break;
-				case 'hash':
-					$directive .= sprintf(" %s", $source['value']);
-					break;
-			}
-		}
-
-		return $directive;
 	}
 	
 	protected static function setHeader_StrictTransportSecurity(Response $response) {

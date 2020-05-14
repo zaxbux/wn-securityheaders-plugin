@@ -104,6 +104,10 @@
                 'label' => 'Sandbox',
                 'comment' => 'Apply restrictions to a page\'s actions. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/sandbox" target="_blank">Learn more</a>',
             ],
+            'csp_enable' => [
+                'label' => 'Enable',
+                'comment' => '',
+            ],
         ],
     ],
 ];

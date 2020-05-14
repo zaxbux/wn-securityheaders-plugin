@@ -53,6 +53,3 @@ csp[frame-ancestors][_sources]:
                     type: text
                     label: zaxbux.securityheaders::lang.fields.settings.csp_source_scheme.name
                     comment: zaxbux.securityheaders::lang.fields.settings.csp_source_scheme.comment
-csp[report-uri]:
-    type: text
-    tab: report-uri
