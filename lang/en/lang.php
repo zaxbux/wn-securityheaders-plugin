@@ -66,12 +66,12 @@
 
             'csp_none' => 'No URLs match.',
             'csp_self' => 'Origin that the resource is being served from.',
-            'csp_unsafe_eval' =>  'Allows the use of eval() and similar methods.',
-            'csp_unsafe_hashes' => 'Allows to enable specific inline event handlers.',
-            'csp_unsafe_inline' => 'Allows the use of inline resources.',
+            'csp_unsafe-eval' =>  'Allows the use of eval() and similar methods.',
+            'csp_unsafe-hashes' => 'Allows to enable specific inline event handlers.',
+            'csp_unsafe-inline' => 'Allows the use of inline resources.',
             'csp_nonce' => 'A whitelist for specific inline scripts using a cryptographic nonce.',
-            'csp_strict_dynamic' => 'The trust explicitly given to a script shall be propagated to all the scripts loaded by that root script.',
-            'csp_report_sample' => 'Requires a sample of the violating code to be included in the violation report.',
+            'csp_strict-dynamic' => 'The trust explicitly given to a script shall be propagated to all the scripts loaded by that root script.',
+            'csp_report-sample' => 'Requires a sample of the violating code to be included in the violation report.',
             'csp_sources' => 'Add Source',
             'csp_source_host' => [
                 'name' => 'Host',
@@ -87,6 +87,22 @@
                 'name' => 'Hash',
                 'description' => 'A sha256, sha384 or sha512 hash of scripts or styles.',
                 'comment' => '<hash-algorithm>-<base64-value> A sha256, sha384 or sha512 hash',
+            ],
+            'csp_report_only' => [
+                'label' => 'Report Only',
+                'comment' => 'Monitor, but do not enforce the Content-Security-Policy header. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only" target="_blank">Learn more</a>',
+            ],
+            'csp_block_all_mixed_content' => [
+                'label' => 'Block All Mixed Content',
+                'comment' => '<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content" target="_blank">Learn more</a>',
+            ],
+            'csp_upgrade_insecure_requests' => [
+                'label' => 'Upgrade Insecure Requests',
+                'comment' => '<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests" target="_blank">Learn more</a>',
+            ],
+            'csp_sandbox' => [
+                'label' => 'Sandbox',
+                'comment' => 'Apply restrictions to a page\'s actions. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/sandbox" target="_blank">Learn more</a>',
             ],
         ],
     ],

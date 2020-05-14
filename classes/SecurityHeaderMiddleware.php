@@ -100,7 +100,8 @@ class SecurityHeaderMiddleware {
 	}
 
 	protected static function setHeader_ContentSecurityPolicy(Response $response, $nonce) {
-		$header = '';
+		$header     = '';
+		$headerName = 'Content-Security-Policy';
 
 		$policy = Settings::get('csp', []); //var_dump($policy); die();
 		foreach ($policy as $directive => $value) {
@@ -140,8 +141,12 @@ class SecurityHeaderMiddleware {
 			}
 		}
 
+		if ($policy['report-only']) {
+			$headerName .= '-Report-Only';
+		}
+
 		if ($header) {
-			$response->header('Content-Security-Policy', trim($header));
+			$response->header($headerName, trim($header));
 		}
 	}
 

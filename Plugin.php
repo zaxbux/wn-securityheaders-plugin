@@ -1,8 +1,10 @@
 <?php namespace Zaxbux\SecurityHeaders;
 
-use System\Classes\PluginBase;
-
+use Yaml;
 use Validator;
+use System\Classes\PluginBase;
+use Zaxbux\SecurityHeaders\Classes\CSPDirectives;
+
 
 class Plugin extends PluginBase {
     /**
@@ -22,6 +24,30 @@ class Plugin extends PluginBase {
          * Validation
          */
         Validator::extend('csp_source', Rules\CSPSource::class);
+
+        /*
+         * Form Fields
+         */
+        \Event::listen('backend.form.extendFields', function ($widget) {
+			if (!$widget->getController() instanceof \System\Controllers\Settings) {
+				return;
+			}
+
+			if (!$widget->model instanceof Models\Settings) {
+				return;
+            }
+            
+            // Avoid adding fields to the repeater type fields
+            if ($widget->isNested != false) {
+                return;
+            }
+
+            $widget->addSecondaryTabFields(CSPDirectives::getFormConfig());
+
+            
+            $config = Yaml::parseFile($widget->getController()->getConfigPath('$/zaxbux/securityheaders/models/settings/fields-csp.yaml'));
+            $widget->addSecondaryTabFields($config);
+        });
     }
 
     public function registerComponents() {
