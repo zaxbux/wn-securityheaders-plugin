@@ -1,0 +1,15 @@
+{
+    "name": "zaxbux/securityheaders",
+    "description": "Easily configure HTTP response headers to increase site security.",
+    "type": "october-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Zach Schneider",
+            "email": "hello@zacharyschneider.ca"
+        }
+    ],
+    "require": {
+        "php": "7"
+    }
+}
