@@ -5,7 +5,7 @@ namespace Zaxbux\SecurityHeaders\Models;
 use Model;
 use Cache;
 use October\Rain\Exception\ValidationException;
-use Zaxbux\SecurityHeaders\Classes\CSPHeaderBuilder;
+use Zaxbux\SecurityHeaders\Classes\HeaderBuilder;
 
 class Settings extends Model {
 	use \October\Rain\Database\Traits\Validation;
@@ -76,7 +76,12 @@ class Settings extends Model {
 	}
 
 	public function afterSave() {
-		// Remove header from cache
-		Cache::forget(CSPHeaderBuilder::CACHE_KEY);
+		// Remove headers from cache
+		Cache::forget(HeaderBuilder::CACHE_KEY_CONTENT_SECURITY_POLICY);
+		Cache::forget(HeaderBuilder::CACHE_KEY_STRICT_TRANSPORT_SECURITY);
+		Cache::forget(HeaderBuilder::CACHE_KEY_REFERRER_POLICY);
+		Cache::forget(HeaderBuilder::CACHE_KEY_FRAME_OPTIONS);
+		Cache::forget(HeaderBuilder::CACHE_KEY_CONTENT_TYPE_OPTIONS);
+		Cache::forget(HeaderBuilder::CACHE_KEY_XSS_PROTECTION);
 	}
 }
