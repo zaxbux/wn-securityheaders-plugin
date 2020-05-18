@@ -63,7 +63,7 @@ class Settings extends Model {
 		$this->hsts_max_age           = '31536000';
 		$this->hsts_subdomains        = false;
 		$this->hsts_preload           = false;
-		$this->referrer_policy        = 'no-referrer-when-downgrade';
+		$this->referrer_policy        = 'strict-origin-when-cross-origin';
 		$this->frame_options          = 'deny';
 		$this->content_type_options   = true;
 		$this->xss_protection         = null;

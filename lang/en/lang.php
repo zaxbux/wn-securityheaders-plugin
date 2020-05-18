@@ -46,7 +46,7 @@
             ],
             'referrer_policy' => [
                 'label' => 'Referrer-Policy',
-                'comment' => 'Recommended: <strong>no-referrer-when-downgrade</strong>. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy" target="_blank">Learn more</a>',
+                'comment' => 'Recommended: <strong>strict-origin-when-cross-origin</strong>. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy" target="_blank">Learn more</a>',
             ],
             'frame_options' => [
                 'label' => 'X-Frame-Options',
