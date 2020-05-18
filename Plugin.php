@@ -57,7 +57,7 @@ class Plugin extends PluginBase {
                 'tab'   => 'zaxbux.securityheaders::lang.plugin.name',
                 'order' => 200,
                 'roles' => [
-                    // role API codes
+                    'developer'
                 ]
             ],
         ];
