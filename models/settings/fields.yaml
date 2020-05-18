@@ -131,6 +131,10 @@ fields:
         comment: zaxbux.securityheaders::lang.fields.settings.csp_block_all_mixed_content.comment
         commentHtml: true
         span: left
+        trigger:
+            action: disable
+            field: csp[upgrade-insecure-requests]
+            condition: checked
     
     csp[upgrade-insecure-requests]:
         type: checkbox
@@ -138,6 +142,10 @@ fields:
         comment: zaxbux.securityheaders::lang.fields.settings.csp_upgrade_insecure_requests.comment
         commentHtml: true
         span: right
+        trigger:
+            action: disable
+            field: csp[block-all-mixed-content]
+            condition: checked
     
     ### sandbox ###
     csp[sandbox]:
