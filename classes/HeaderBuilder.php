@@ -93,8 +93,8 @@ class HeaderBuilder {
 	 */
 	public static function addFrameOptions(Response $response) {
 		$header = Cache::rememberForever(self::CACHE_KEY_FRAME_OPTIONS, function() {
-			if (Settings::get('frame_options')) {
-				return new HttpHeader('X-Frame-Options', 'nosniff');
+			if ($value = Settings::get('frame_options')) {
+				return new HttpHeader('X-Frame-Options', $value);
 			}
 
 			return false;
