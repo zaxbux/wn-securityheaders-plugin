@@ -1,0 +1,7 @@
+<?php if ($value == 'report_only'): ?>
+	<span class="list-badge badge-info"><i class="icon-info"></i></span> <?= e(trans('zaxbux.securityheaders::lang.report_widgets.csp_reports.report_only_text')); ?>
+<?php elseif ($value == 'enforce'): ?>
+	<span class="list-badge badge-warning"><i class="icon-exclamation"></i></span> <?= e(trans('zaxbux.securityheaders::lang.report_widgets.csp_reports.enforce_text')); ?>
+<?php else: ?>
+	<span class="list-badge badge-default"><i class="icon-question"></i></span> <?= e($value, true); ?>
+<?php endif; ?>

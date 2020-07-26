@@ -1,0 +1,81 @@
+fields:
+    _section_referrer_policy:
+        type: section
+        label: Referrer-Policy
+
+    referrer_policy:
+        type: dropdown
+        label: zaxbux.securityheaders::lang.fields.miscellaneoussettings.referrer_policy.label
+        comment: zaxbux.securityheaders::lang.fields.miscellaneoussettings.referrer_policy.comment
+        commentHtml: true
+        span: auto
+        showSearch: false
+        emptyOption: zaxbux.securityheaders::lang.fields.miscellaneoussettings._unset
+        options:
+            no-referrer: no-referrer
+            no-referrer-when-downgrade: no-referrer-when-downgrade
+            origin: origin
+            origin-when-cross-origin: origin-when-cross-origin
+            same-origin: same-origin
+            strict-origin: strict-origin
+            strict-origin-when-cross-origin: strict-origin-when-cross-origin
+            unsafe-url: unsafe-url
+
+    _section_frame_options:
+        type: section
+        label: X-Frame-Options
+        comment: Note, this header is obseleted by the CSP frame-ancestors directive.
+
+    frame_options:
+        type: dropdown
+        label: zaxbux.securityheaders::lang.fields.miscellaneoussettings.frame_options.label
+        comment: zaxbux.securityheaders::lang.fields.miscellaneoussettings.frame_options.comment
+        commentHtml: true
+        span: auto
+        showSearch: false
+        emptyOption: zaxbux.securityheaders::lang.fields.miscellaneoussettings._unset
+        options:
+            deny: deny
+            sameorigin: sameorigin
+
+    _section_content_type_options:
+        type: section
+        label: X-Content-Type-Options
+    content_type_options:
+        type: switch
+        label: zaxbux.securityheaders::lang.fields.miscellaneoussettings.content_type_options.label
+        comment: zaxbux.securityheaders::lang.fields.miscellaneoussettings.content_type_options.comment
+        commentHtml: true
+        span: auto
+
+    _section_xss_protection:
+        type: section
+        label: X-XSS-Protection
+        comment: '<span class="text-warning"><i class="icon-exclamation-triangle"></i> Deprecated</span>'
+        commentHtml: true
+
+    xss_protection:
+        type: dropdown
+        label: zaxbux.securityheaders::lang.fields.miscellaneoussettings.xss_protection.label
+        comment: zaxbux.securityheaders::lang.fields.miscellaneoussettings.xss_protection.comment
+        commentHtml: true
+        span: auto
+        showSearch: false
+        emptyOption: zaxbux.securityheaders::lang.fields.miscellaneoussettings._unset
+        options:
+            disable: zaxbux.securityheaders::lang.fields.miscellaneoussettings.xss_protection.option_disable
+            enable: zaxbux.securityheaders::lang.fields.miscellaneoussettings.xss_protection.option_enable
+            block: zaxbux.securityheaders::lang.fields.miscellaneoussettings.xss_protection.option_block
+
+    _section_report_to:
+        type: section
+        label: Report-To
+        comment: 'This header instructs the user agent to store reporting endpoints for an origin.'
+        commentHtml: true
+
+    report_to:
+        type: switch
+        label: zaxbux.securityheaders::lang.fields.miscellaneoussettings.report_to.label
+        comment: zaxbux.securityheaders::lang.fields.miscellaneoussettings.report_to.comment
+        commentHtml: true
+        span: full

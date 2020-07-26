@@ -1,0 +1,88 @@
+<?php Block::put('breadcrumb') ?>
+	<ul>
+		<li><a href="<?= Backend::url('zaxbux/securityheaders/csplogs') ?>"><?= e(trans('CSP Reports')) ?></a></li>
+		<li><?= e(trans($this->pageTitle)) ?></li>
+	</ul>
+<?php Block::endPut() ?>
+
+<?php if (!$this->fatalError): ?>
+
+	<div class="scoreboard">
+		<div data-control="toolbar">
+			<div class="scoreboard-item title-value">
+				<h4><?= e(trans('system::lang.event_log.created_at')) ?></h4>
+				<p><?= $formModel->created_at->toDayDateTimeString() ?></p>
+			</div>
+			<div class="scoreboard-item title-value">
+				<h4><?= e(trans('Action')) ?></h4>
+				<p><?= $formModel->action ?></p>
+			</div>
+		</div>
+	</div>
+
+	<div class="layout-item stretch layout-column csp-details-content">
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Blocked URI</th>
+					<td><?= e($formModel->blocked_uri); ?></td>
+				</tr>
+				<tr>
+					<th>Disposition</th>
+					<td><?= e($formModel->disposition); ?></td>
+				</tr>
+				<tr>
+					<th>Document URI</th>
+					<td><?= e($formModel->document_uri); ?></td>
+				</tr>
+				<tr>
+					<th>Effective Directive</th>
+					<td><?= e($formModel->effective_directive); ?></td>
+				</tr>
+				<tr>
+					<th>Original Policy</th>
+					<td><?= e($formModel->original_policy); ?></td>
+				</tr>
+				<tr>
+					<th>Referrer</th>
+					<td><?= e($formModel->referrer); ?></td>
+				</tr>
+				<tr>
+					<th>Script Sample</th>
+					<td><code><?= e($formModel->script_sample); ?></code></td>
+				</tr>
+				<tr>
+					<th>Status Code</th>
+					<td><?= e($formModel->status_code); ?></td>
+				</tr>
+				<tr>
+					<th>Violated Directive</th>
+					<td><?= e($formModel->violated_directive); ?></td>
+				</tr>
+				<tr>
+					<th>User Agent</th>
+					<td>
+						<code><?= e($formModel->user_agent); ?></code>
+					</td>
+				</tr>
+				<tr>
+					<th>Original</th>
+					<td>
+						<pre id="csp-report-original"><code><?= $formModel->prettyPrinted(); ?></code></pre>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+<?php else: ?>
+
+	<p class="flash-message static error"><?= e(trans($this->fatalError)) ?></p>
+
+<?php endif ?>
+
+<p>
+	<a href="<?= Backend::url('zaxbux/securityheaders/csplogs') ?>" class="btn btn-default oc-icon-chevron-left">
+		<?= e(trans('system::lang.event_log.return_link')) ?>
+	</a>
+</p>

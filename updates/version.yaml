@@ -1,4 +1,8 @@
 1.0.1:
-    - Initialize plugin.
+    - 'Initialize plugin.'
 1.0.2:
-    - Fix bug with X-Frame-Options header
+    - 'Fix bug with X-Frame-Options header.'
+1.0.3:
+    - 'Added reporting & logging capabilities.'
+    - table_create_zaxbux_securityheaders_reporting_csp.php
+    - migrate_settings_103.php

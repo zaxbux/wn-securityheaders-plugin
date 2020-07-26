@@ -2,10 +2,15 @@
 
 namespace Zaxbux\SecurityHeaders\Classes;
 
+use Url;
 use Cache;
+use Config;
 use Illuminate\Http\Response;
-use Zaxbux\SecurityHeaders\Models\Settings;
 use Zaxbux\SecurityHeaders\Classes\HttpHeader;
+use Zaxbux\SecurityHeaders\Classes\CSPFormBuilder;
+use Zaxbux\SecurityHeaders\Models\CSPSettings;
+use Zaxbux\SecurityHeaders\Models\HSTSSettings;
+use Zaxbux\SecurityHeaders\Models\MiscellaneousHeaderSettings;
 
 class HeaderBuilder {
 
@@ -15,7 +20,7 @@ class HeaderBuilder {
 	const CACHE_KEY_FRAME_OPTIONS             = "zaxbux_securityheaders_frame_options";
 	const CACHE_KEY_CONTENT_TYPE_OPTIONS      = "zaxbux_securityheaders_content_type";
 	const CACHE_KEY_XSS_PROTECTION            = "zaxbux_securityheaders_xss";
-
+	const CACHE_KEY_REPORT_TO                 = "zaxbux_securityheaders_report_to";
 
 	/**
 	 * Add the Content-Security-Policy or Content-Security-Policy-Report-Only header to the response
@@ -24,13 +29,11 @@ class HeaderBuilder {
 	 */
 	public static function addContentSecurityPolicy(Response $response, $nonce) {
 		$header = Cache::rememberForever(self::CACHE_KEY_CONTENT_SECURITY_POLICY, function() {
-			$policy = Settings::get('csp');
-
-			if (!$policy['enabled']) {
+			if (!CSPSettings::get('enabled')) {
 				return false;
 			}
 
-			return self::buildContentSecurityPolicyHeader($policy);
+			return self::buildContentSecurityPolicyHeader();
 		});
 
 		if ($header) {
@@ -45,17 +48,17 @@ class HeaderBuilder {
 	 */
 	public static function addStrictTransportSecurity(Response $response) {
 		$header = Cache::rememberForever(self::CACHE_KEY_STRICT_TRANSPORT_SECURITY, function() {
-			if (!Settings::get('hsts_enable')) {
+			if (!HSTSSettings::get('enabled')) {
 				return false;
 			}
 
-			$value = sprintf('max-age=%d', Settings::get('hsts_max_age'));
+			$value = sprintf('max-age=%d', HSTSSettings::get('max_age'));
 
-			if (Settings::get('hsts_subdomains')) {
+			if (HSTSSettings::get('subdomains')) {
 				$value .= '; includeSubDomains';
 			}
 	
-			if (Settings::get('hsts_preload')) {
+			if (HSTSSettings::get('preload')) {
 				$value .= '; preload';
 			}
 
@@ -74,7 +77,7 @@ class HeaderBuilder {
 	 */
 	public static function addReferrerPolicy(Response $response) {
 		$header = Cache::rememberForever(self::CACHE_KEY_REFERRER_POLICY, function() {
-			if ($value = Settings::get('referrer_policy')) {
+			if ($value = MiscellaneousHeaderSettings::get('referrer_policy')) {
 				return new HttpHeader('Referrer-Policy', $value);
 			}
 
@@ -93,7 +96,7 @@ class HeaderBuilder {
 	 */
 	public static function addFrameOptions(Response $response) {
 		$header = Cache::rememberForever(self::CACHE_KEY_FRAME_OPTIONS, function() {
-			if ($value = Settings::get('frame_options')) {
+			if ($value = MiscellaneousHeaderSettings::get('frame_options')) {
 				return new HttpHeader('X-Frame-Options', $value);
 			}
 
@@ -112,7 +115,7 @@ class HeaderBuilder {
 	 */
 	public static function addContentTypeOptions(Response $response) {
 		$header = Cache::rememberForever(self::CACHE_KEY_CONTENT_TYPE_OPTIONS, function() {
-			if ($value = Settings::get('content_type_options')) {
+			if ($value = MiscellaneousHeaderSettings::get('content_type_options')) {
 				return new HttpHeader('X-Content-Type-Options', $value);
 			}
 
@@ -131,7 +134,7 @@ class HeaderBuilder {
 	 */
 	public static function addXSSProtection(Response $response) {
 		$header = Cache::rememberForever(self::CACHE_KEY_XSS_PROTECTION, function() {
-			$value = Settings::get('xss_protection');
+			$value = MiscellaneousHeaderSettings::get('xss_protection');
 
 			switch ($value) {
 				case 'disable':
@@ -155,43 +158,101 @@ class HeaderBuilder {
 		}
 	}
 
-	private static function buildContentSecurityPolicyHeader($policy) {
+	/**
+	 * Add the X-XSS-Protection header to the response
+	 * 
+	 * @param Illuminate\Http\Response
+	 */
+	public static function addReportTo(Response $response) {
+		$header = Cache::rememberForever(self::CACHE_KEY_REPORT_TO, function() {
+			if (!MiscellaneousHeaderSettings::get('report_to')) {
+				return false;
+			}
+
+			$action = CSPSettings::get('report_only') ? 'report_only' : 'enforce';
+
+			$value = [
+				'group' => 'csp-endpoint',
+				'max_age' => 2592000,
+				'enpoints' => [
+					['url' => Url::route('zaxbux.securityheaders.reports.csp_endpoint', ['action' => $action])]
+				]
+			];
+
+			return new HttpHeader('Report-To', \json_encode($value));
+		});
+
+		if ($header) {
+			$response->header($header->getName(), $header->getValue());
+		}
+	}
+
+	private static function buildContentSecurityPolicyHeader() {
 		$header = new HttpHeader('Content-Security-Policy');
 
 		$directives = [];
 
-		if ($policy['report-only']) {
+		if (CSPSettings::get('report_only')) {
 			$header->setName('Content-Security-Policy-Report-Only');
 		}
 
-		foreach ($policy as $directive => $value) {
-			if (\in_array($directive, array_merge(Settings::CSP_FETCH_DIRECTIVES, Settings::CSP_NAVIGATION_DIRECTIVES, ['base-uri']))) {
-				$directives[] = self::parseCSPDirectiveSources($directive, $value);
+		// Fetch directives, navigation directives, and base-uri directive
+		$sourceBasedDirectives = ['base-uri'];
+
+		foreach (CSPFormBuilder::CSP_DIRECTIVES['fetch'] as $directive) {
+			$sourceBasedDirectives[] = $directive['name'];
+		}
+
+		foreach (CSPFormBuilder::CSP_DIRECTIVES['navigation'] as $directive) {
+			$sourceBasedDirectives[] = $directive['name'];
+		}
+
+		//var_dump($sourceBasedDirectives); die();
+
+		foreach ($sourceBasedDirectives as $sourceBasedDirective) {
+			if ($sourceData = CSPSettings::get(\str_replace('-', '_', $sourceBasedDirective))) {
+				$directives[] = self::parseCSPDirectiveSources($sourceBasedDirective, $sourceData);
 			}
+		}
 
-			if ($directive == 'plugin-types') {
-				$types = [];
+		// Plugin Types
+		$pluginTypes = [];
 
-				foreach ($value['types'] as $type) {
-					$types[] = $type['value'];
-				}
+		foreach (CSPSettings::get('plugin_types', []) as $typeGroup) {
+			$pluginTypes[] = $typeGroup['value'];
+		}
 
-				if (count($types) > 0) {
-					$directives[] = sprintf('plugin-types %s;', \join(' ', $types));
-				}
-			}
+		if (count($pluginTypes) > 0) {
+			$directives[] = sprintf('plugin-types %s;', \join(' ', $pluginTypes));
+		}
 
-			if ($directive == 'sandbox' && $value) {
-				$directives[] = \sprintf('sandbox %s;', $value);
-			}
+		// Sandbox
+		if ($sandbox = CSPSettings::get('sandbox')) {
+			$directives[] = \sprintf('sandbox %s;', \implode(' ', $sandbox));
+		}
 
-			if ($directive == 'upgrade-insecure-requests' && $value == true) {
-				$directives[] = 'upgrade-insecure-requests;';
-			}
+		// Upgrade Insecure Requests
+		if (CSPSettings::get('upgrade_insecure_requests')) {
+			$directives[] = 'upgrade-insecure-requests;';
+		}
 
-			if ($directive == 'block-all-mixed-content' && $value == true) {
-				$directives[] = 'block-all-mixed-content;';
-			}
+		// Block All Mixed Content
+		if (CSPSettings::get('block_all_mixed_content')) {
+			$directives[] = 'block-all-mixed-content;';
+		}
+
+		// Policy violation logging
+		if (CSPSettings::get('log_violations') == true) {
+			$action = CSPSettings::get('report_only') ? 'report_only' : 'enforce';
+
+			$reportUri = Url::route('zaxbux.securityheaders.reports.csp_endpoint', ['action' => $action]);
+
+			$directives[] = \sprintf('report-uri %s;', $reportUri);
+		}
+
+		// Report-To support
+		if (MiscellaneousHeaderSettings::get('report_to')) {
+			$directives[] = 'report-to csp-endpoint;';
 		}
 
 		if (count(array_filter($directives)) > 0) {
@@ -206,7 +267,7 @@ class HeaderBuilder {
 
 		foreach ($sourceData as $source => $data) {
 			// User-provided URIs and hashes
-			if ($source == '_sources') {
+			if ($source == '_user_sources') {
 				foreach ($data as $value) {
 					if (!empty($value['value'])) {
 						$sources[] = $value['value'];
@@ -216,7 +277,7 @@ class HeaderBuilder {
 				continue;
 			}
 
-			if ($source == 'nonce' && $data == true) {
+			if ($source == 'nonce-source' && $data == true) {
 				// %1$s is replaced with the nonce on every response
 				$sources[] = "'nonce-%1\$s'";
 

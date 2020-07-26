@@ -1,0 +1,40 @@
+# ===================================
+# Filter Scope Definitions
+# ===================================
+
+scopes:
+    action:
+        label: Action
+        type: group
+        conditions: action in (:filtered)
+        options:
+            report_only: Report Only
+            enforce: Enforced
+
+    created_at:
+        label: backend::lang.access_log.created_at
+        type: daterange
+        conditions: created_at >= ':after' AND created_at <= ':before'
+    
+    # browser:
+    #     label: Browser
+    #     type: group
+    #     scope: browser
+    #     options:
+    #         unknown: Unknown
+    #         chrome: Chrome
+    #         firefox: Firefox
+    #         edge: Edge
+    #         safari: Safari
+    #         opera: Opera
+    # os:
+    #     label: OS
+    #     type: group
+    #     scope: operatingSystem
+    #     options:
+    #         unknown: Unknown
+    #         android: Android
+    #         ios: iOS
+    #         linux: Linux
+    #         mac: macOS
+    #         windows: Windows

@@ -1,0 +1,20 @@
+fields:
+    enabled:
+        type: switch
+        label: zaxbux.securityheaders::lang.fields.cspsettings.enabled.label
+        comment: zaxbux.securityheaders::lang.fields.cspsettings.enabled.comment
+        commentHtml: true
+        span: full
+
+    report_only:
+        type: switch
+        label: zaxbux.securityheaders::lang.fields.cspsettings.report_only.label
+        comment: zaxbux.securityheaders::lang.fields.cspsettings.report_only.comment
+        commentHtml: true
+        span: left
+
+    log_violations:
+        type: switch
+        label: zaxbux.securityheaders::lang.fields.cspsettings.log_violations.label
+        comment: zaxbux.securityheaders::lang.fields.cspsettings.log_violations.comment
+        span: right

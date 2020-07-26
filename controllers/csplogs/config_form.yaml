@@ -1,0 +1,19 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: CSP Reports
+
+# Model Form Field configuration
+form: $/zaxbux/securityheaders/models/csplog/fields.yaml
+
+# Model Class name
+modelClass: Zaxbux\SecurityHeaders\Models\CSPLog
+
+# Default redirect location
+defaultRedirect: zaxbux/securityheaders/csplogs
+
+# Preview page
+preview:
+    title: CSP Report

@@ -1,0 +1,23 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+#title: zaxbux.securityheaders::lang.event_log.menu_label
+title: CSP Reports
+list: $/zaxbux/securityheaders/models/csplog/columns.yaml
+modelClass: Zaxbux\SecurityHeaders\Models\CSPLog
+recordUrl: zaxbux/securityheaders/csplogs/preview/:id
+noRecordsMessage: backend::lang.list.no_records
+recordsPerPage: 30
+defaultSort:
+    column: created_at
+    direction: desc
+showSetup: true
+showCheckboxes: true
+
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: backend::lang.list.search_prompt
+
+filter: config_filter.yaml

@@ -1,82 +1,141 @@
 <?php namespace Zaxbux\SecurityHeaders;
 
 use Yaml;
+use Backend;
 use System\Classes\PluginBase;
-use Zaxbux\SecurityHeaders\Classes\CSPDirectives;
+use Zaxbux\SecurityHeaders\Classes\CSPFormBuilder;
 
 
 class Plugin extends PluginBase {
-    /**
-     * @var bool Plugin requires elevated permissions.
-     * Necessary to alter headers on combined assets (/combine)
-     */
-    public $elevated = true;
+	/**
+	 * @var bool Plugin requires elevated permissions.
+	 * Necessary to alter headers on combined assets (/combine)
+	 */
+	public $elevated = true;
 
-    public function boot() {
-        /*
-         * Middleware
-         */
-        $this->app['Illuminate\Contracts\Http\Kernel']->prependMiddleware(Classes\NonceGeneratorMiddleware::class);
-        $this->app['Illuminate\Contracts\Http\Kernel']->pushMiddleware(Classes\SecurityHeaderMiddleware::class);
+	public function boot() {
+		/*
+		 * Middleware
+		 */
+		$this->app['Illuminate\Contracts\Http\Kernel']->prependMiddleware(Classes\NonceGeneratorMiddleware::class);
+		$this->app['Illuminate\Contracts\Http\Kernel']->pushMiddleware(Classes\SecurityHeaderMiddleware::class);
 
-        /*
-         * Form Fields
-         */
-        \Event::listen('backend.form.extendFields', function ($widget) {
+		/*
+		 * Form Fields
+		 */
+		\Event::listen('backend.form.extendFields', function ($widget) {
 			if (!$widget->getController() instanceof \System\Controllers\Settings) {
 				return;
 			}
 
-			if (!$widget->model instanceof Models\Settings) {
+			if (!$widget->model instanceof Models\CSPSettings) {
 				return;
-            }
-            
-            // Avoid adding fields to the repeater type fields
-            if ($widget->isNested != false) {
-                return;
-            }
+			}
+			
+			// Avoid adding fields to the repeater type fields
+			if ($widget->isNested != false) {
+				return;
+			}
 
-            $widget->addSecondaryTabFields(CSPDirectives::getFormConfig());
+			$builder = new CSPFormBuilder;
+			$builder->makeForm($widget);
+		});
+	}
 
-            
-            $config = Yaml::parseFile($widget->getController()->getConfigPath('$/zaxbux/securityheaders/models/settings/fields-csp.yaml'));
-            $widget->addSecondaryTabFields($config);
-        });
-    }
+	public function registerComponents() {
+		return [
+			Components\NonceProvider::class => Components\NonceProvider::SHORT_NAME,
+		];
+	}
 
-    public function registerComponents() {
-        return [
-            Components\NonceProvider::class => Components\NonceProvider::SHORT_NAME,
-        ];
-    }
+	public function registerPermissions() {
+		return [
+			'zaxbux.securityheaders.access_settings' => [
+				'label' => 'zaxbux.securityheaders::lang.permissions.access_settings',
+				'tab'   => 'zaxbux.securityheaders::lang.plugin.name',
+				'roles' => [
+					'developer',
+				]
+			],
+			'zaxbux.securityheaders.access_logs' => [
+				'label' => 'zaxbux.securityheaders::lang.permissions.access_logs',
+				'tab' => 'zaxbux.securityheaders::lang.plugin.name',
+				'roles' => [
+					'developer',
+				]
+			],
+			'zaxbux.securityheaders.view_widgets' => [
+				'label' => 'zaxbux.securityheaders::lang.permissions.view_widgets',
+				'tab'   => 'zaxbux.securityheaders::lang.plugin.name',
+				'roles' => [
+					'developer',
+				],
+			],
+		];
+	}
 
-    public function registerPermissions() {
-        return [
-            'zaxbux.securityheaders.access_settings' => [
-                'label' => 'zaxbux.securityheaders::lang.permissions.access_settings',
-                'tab'   => 'zaxbux.securityheaders::lang.plugin.name',
-                'order' => 200,
-                'roles' => [
-                    'developer'
-                ]
-            ],
-        ];
-    }
+	public function registerReportWidgets() {
+		return [
+			'Zaxbux\SecurityHeaders\ReportWidgets\CSPReports' => [
+				'label'       => 'zaxbux.securityheaders::lang.report_widgets.csp_reports.label',
+				'context'     => 'dashboard',
+				'permissions' => [
+					'zaxbux.securityheaders.view_widgets',
+				],
+			]
+		];
+	}
 
-    public function registerSettings() {
-        return [
-            'settings' => [
-                'label'       => 'zaxbux.securityheaders::lang.settings.label',
-                'description' => 'zaxbux.securityheaders::lang.settings.description',
-                'category'    => 'zaxbux.securityheaders::lang.settings.category',
-                'icon'        => 'icon-shield',
-                'class'       => Models\Settings::class,
-                'order'       => 500,
-                'keywords'    => 'security headers csp',
-                'permissions' => [
-                    'zaxbux.securityheaders.access_settings'
-                ]
-            ],
-        ];
-    }
+	public function registerSettings() {
+		return [
+			'csp' => [
+				'label'       => 'zaxbux.securityheaders::lang.settings.csp.label',
+				'description' => 'zaxbux.securityheaders::lang.settings.csp.description',
+				'category'    => 'zaxbux.securityheaders::lang.settings.category',
+				'icon'        => 'icon-shield',
+				'class'       => Models\CSPSettings::class,
+				'order'       => 500,
+				'keywords'    => 'security headers csp',
+				'permissions' => [
+					'zaxbux.securityheaders.access_settings'
+				],
+			],
+			'hsts' => [
+				'label'       => 'zaxbux.securityheaders::lang.settings.hsts.label',
+				'description' => 'zaxbux.securityheaders::lang.settings.hsts.description',
+				'category'    => 'zaxbux.securityheaders::lang.settings.category',
+				'icon'        => 'icon-shield',
+				'class'       => Models\HSTSSettings::class,
+				'order'       => 501,
+				'keywords'    => 'security headers sts hsts',
+				'permissions' => [
+					'zaxbux.securityheaders.access_settings'
+				],
+			],
+			'miscellaneous' => [
+				'label'       => 'zaxbux.securityheaders::lang.settings.miscellaneous.label',
+				'description' => 'zaxbux.securityheaders::lang.settings.miscellaneous.description',
+				'category'    => 'zaxbux.securityheaders::lang.settings.category',
+				'icon'        => 'icon-shield',
+				'class'       => Models\MiscellaneousHeaderSettings::class,
+				'order'       => 502,
+				'keywords'    => 'security headers',
+				'permissions' => [
+					'zaxbux.securityheaders.access_settings'
+				],
+			],
+			'csp_logs' => [
+				'label'       => 'zaxbux.securityheaders::lang.settings.csp_logs.label',
+				'description' => 'zaxbux.securityheaders::lang.settings.csp_logs.description',
+				'category'    => 'zaxbux.securityheaders::lang.settings.category',
+				'icon'        => 'icon-shield',
+				'url'         => Backend::url('zaxbux/securityheaders/csplogs'),
+				'order'       => 503,
+				'keywords'    => 'security headers csp',
+				'permissions' => [
+					'zaxbux.securityheaders.access_settings'
+				],
+			],
+		];
+	}
 }

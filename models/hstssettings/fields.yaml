@@ -1,0 +1,35 @@
+fields:
+    enabled:
+        type: switch
+        label: zaxbux.securityheaders::lang.fields.hstssettings.enabled.label
+        comment: zaxbux.securityheaders::lang.fields.hstssettings.enabled.comment
+        commentHtml: true
+        span: full
+    max_age:
+        type: dropdown
+        label: zaxbux.securityheaders::lang.fields.hstssettings.max_age.label
+        comment: zaxbux.securityheaders::lang.fields.hstssettings.max_age.comment
+        commentHtml: true
+        span: left
+        showSearch: false
+        options:
+            2592000: zaxbux.securityheaders::lang.fields.hstssettings.max_age.option_1months
+            5184000: zaxbux.securityheaders::lang.fields.hstssettings.max_age.option_2months
+            7776000: zaxbux.securityheaders::lang.fields.hstssettings.max_age.option_3months
+            10368000: zaxbux.securityheaders::lang.fields.hstssettings.max_age.option_4months
+            12960000: zaxbux.securityheaders::lang.fields.hstssettings.max_age.option_5months
+            15552000: zaxbux.securityheaders::lang.fields.hstssettings.max_age.option_6months
+            31536000: zaxbux.securityheaders::lang.fields.hstssettings.max_age.option_12months
+            63072000: zaxbux.securityheaders::lang.fields.hstssettings.max_age.option_24months
+    subdomains:
+        type: checkbox
+        label: zaxbux.securityheaders::lang.fields.hstssettings.subdomains.label
+        comment: zaxbux.securityheaders::lang.fields.hstssettings.subdomains.comment
+        commentHtml: true
+        span: full
+    preload:
+        type: checkbox
+        label: zaxbux.securityheaders::lang.fields.hstssettings.preload.label
+        comment: zaxbux.securityheaders::lang.fields.hstssettings.preload.comment
+        commentHtml: true
+        span: full

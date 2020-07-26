@@ -1,0 +1,31 @@
+# ===================================
+#  Column Definitions
+# ===================================
+
+columns:
+    created_at:
+        label: system::lang.event_log.created_at
+        searchable: true
+        width: 160px
+        type: timetense
+
+    action:
+        label: Action
+        type: partial
+        path: action_column
+        searchable: true
+        width: 130px
+
+    document_uri:
+        label: Document URI
+        searchable: true
+        cssClass: column-break-word
+    
+    violated_directive:
+        label: Directive
+        searchable: true
+    
+    blocked_uri:
+        label: Blocked URI
+        searchable: true
+        cssClass: column-break-word
