@@ -172,8 +172,8 @@ class HeaderBuilder {
 			$action = CSPSettings::get('report_only') ? \Zaxbux\SecurityHeaders\Http\Controllers\ReportsController::ACTION_REPORT : \Zaxbux\SecurityHeaders\Http\Controllers\ReportsController::ACTION_ENFORCE;
 
 			$value = [
-				'group' => Config::get('zaxbux.securityheaders::csp_report_to_group', 'csp-endpoint'),
-				'max_age' => Config::get('zaxbux.securityheaders::csp_report_to_max_age', 2592000),
+				'group' => 'csp-endpoint',
+				'max_age' => 2592000,
 				'endpoints' => [
 					['url' => Url::route('zaxbux.securityheaders.reports.csp_endpoint', ['action' => $action])]
 				]
@@ -211,7 +211,11 @@ class HeaderBuilder {
 
 		foreach ($sourceBasedDirectives as $sourceBasedDirective) {
 			if ($sourceData = CSPSettings::get(\str_replace('-', '_', $sourceBasedDirective))) {
-				$directives[] = self::parseCSPDirectiveSources($sourceBasedDirective, $sourceData);
+				$directive = self::parseCSPDirectiveSources($sourceBasedDirective, $sourceData);
+
+				if ($directive) {
+					$directives[] = $directive;
+				}
 			}
 		}
 
