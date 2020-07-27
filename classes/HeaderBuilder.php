@@ -22,6 +22,8 @@ class HeaderBuilder {
 	const CACHE_KEY_XSS_PROTECTION            = "zaxbux_securityheaders_xss";
 	const CACHE_KEY_REPORT_TO                 = "zaxbux_securityheaders_report_to";
 
+	const CSP_REPORT_TO_GROUP = 'csp-endpoint';
+
 	/**
 	 * Add the Content-Security-Policy or Content-Security-Policy-Report-Only header to the response
 	 * 
@@ -172,7 +174,7 @@ class HeaderBuilder {
 			$action = CSPSettings::get('report_only') ? \Zaxbux\SecurityHeaders\Http\Controllers\ReportsController::ACTION_REPORT : \Zaxbux\SecurityHeaders\Http\Controllers\ReportsController::ACTION_ENFORCE;
 
 			$value = [
-				'group' => 'csp-endpoint',
+				'group' => self::CSP_REPORT_TO_GROUP,
 				'max_age' => 2592000,
 				'endpoints' => [
 					['url' => Url::route('zaxbux.securityheaders.reports.csp_endpoint', ['action' => $action])]
@@ -256,7 +258,7 @@ class HeaderBuilder {
 
 		// Report-To support
 		if (MiscellaneousHeaderSettings::get('report_to')) {
-			$directives[] = 'report-to csp-endpoint;';
+			$directives[] = \sprintf('report-to %s;', self::CSP_REPORT_TO_GROUP);
 		}
 
 		if (count(array_filter($directives)) > 0) {
