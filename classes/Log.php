@@ -5,7 +5,9 @@ namespace Zaxbux\SecurityHeaders\Classes;
 use Zaxbux\SecurityHeaders\Models\CSPLog;
 
 class Log {
-	public static function CSPReport($action, $cspReport, $originalData = null, $userAgent = null) {
+	public static function CSPReport($action, $cspBody, $originalData = null, $userAgent = null) {
+		$cspReport = $cspBody['csp-report'];
+		
 		$entry = new CSPLog();
 		$entry->fill([
 			'action'              => $action,

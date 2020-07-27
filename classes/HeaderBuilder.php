@@ -169,11 +169,11 @@ class HeaderBuilder {
 				return false;
 			}
 
-			$action = CSPSettings::get('report_only') ? 'report_only' : 'enforce';
+			$action = CSPSettings::get('report_only') ? \Zaxbux\SecurityHeaders\Http\Controllers\ReportsController::ACTION_REPORT : \Zaxbux\SecurityHeaders\Http\Controllers\ReportsController::ACTION_ENFORCE;
 
 			$value = [
-				'group' => 'csp-endpoint',
-				'max_age' => 2592000,
+				'group' => Config::get('zaxbux.securityheaders::csp_report_to_group', 'csp-endpoint'),
+				'max_age' => Config::get('zaxbux.securityheaders::csp_report_to_max_age', 2592000),
 				'enpoints' => [
 					['url' => Url::route('zaxbux.securityheaders.reports.csp_endpoint', ['action' => $action])]
 				]
