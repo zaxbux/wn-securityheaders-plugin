@@ -10,22 +10,22 @@ columns:
         type: timetense
 
     action:
-        label: Action
+        label: zaxbux.securityheaders::lang.columns.csplog.action
         type: partial
         path: action_column
         searchable: true
         width: 130px
 
     document_uri:
-        label: Document URI
+        label: zaxbux.securityheaders::lang.columns.csplog.document_uri
         searchable: true
         cssClass: column-break-word
     
     violated_directive:
-        label: Directive
+        label: zaxbux.securityheaders::lang.columns.csplog.violated_directive
         searchable: true
     
     blocked_uri:
-        label: Blocked URI
+        label: zaxbux.securityheaders::lang.columns.csplog.blocked_uri
         searchable: true
         cssClass: column-break-word

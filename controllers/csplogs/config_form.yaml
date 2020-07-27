@@ -3,7 +3,7 @@
 # ===================================
 
 # Record name
-name: CSP Reports
+name: zaxbux.securityheaders::lang.forms.csplogs.name
 
 # Model Form Field configuration
 form: $/zaxbux/securityheaders/models/csplog/fields.yaml
@@ -16,4 +16,4 @@ defaultRedirect: zaxbux/securityheaders/csplogs
 
 # Preview page
 preview:
-    title: CSP Report
+    title: zaxbux.securityheaders::lang.forms.csplogs.preview_title

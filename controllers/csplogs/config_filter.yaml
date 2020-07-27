@@ -4,12 +4,12 @@
 
 scopes:
     action:
-        label: Action
+        label: zaxbux.securityheaders::lang.filters.action.label
         type: group
         conditions: action in (:filtered)
         options:
-            report_only: Report Only
-            enforce: Enforced
+            report_only: zaxbux.securityheaders::lang.filters.action.options.report_only
+            enforce: zaxbux.securityheaders::lang.filters.action.options.enforce
 
     created_at:
         label: backend::lang.access_log.created_at

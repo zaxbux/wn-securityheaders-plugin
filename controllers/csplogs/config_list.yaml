@@ -3,7 +3,7 @@
 # ===================================
 
 #title: zaxbux.securityheaders::lang.event_log.menu_label
-title: CSP Reports
+title: zaxbux.securityheaders::lang.forms.csplogs.name
 list: $/zaxbux/securityheaders/models/csplog/columns.yaml
 modelClass: Zaxbux\SecurityHeaders\Models\CSPLog
 recordUrl: zaxbux/securityheaders/csplogs/preview/:id

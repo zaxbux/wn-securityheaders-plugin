@@ -214,4 +214,39 @@
 			],
 		],
 	],
+	'columns' => [
+		'csplog' => [
+			'action' => 'Action',
+			'document_uri' => 'Document URI',
+			'violated_directive' => 'Directive',
+			'blocked_uri' => 'Blocked URI',
+		],
+	],
+	'filters' => [
+		'action' => [
+			'label' => 'Action',
+			'options' => [
+				'report_only' => 'Report Only',
+				'enforce' => 'Enforce',
+			]
+		]
+	],
+	'forms' => [
+		'csplogs' => [
+			'name' => 'CSP Reports',
+			'preview_title' => 'CSP Report',
+			'action' => 'Action',
+			'blocked_uri' => 'Blocked URI',
+			'disposition' => 'Disposition',
+			'document_uri' => 'Document URI',
+			'effective_directive' => 'Effective Directive',
+			'original_policy' => 'Original Policy',
+			'referrer' => 'Referrer',
+			'script_sample' => 'Script Sample',
+			'status_code' => 'Status Code',
+			'violated_directive' => 'Violated Directive',
+			'user_agent' => 'User Agent',
+			'original' => 'Original'
+		]
+	]
 ];

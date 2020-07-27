@@ -1,6 +1,6 @@
 <?php Block::put('breadcrumb') ?>
 	<ul>
-		<li><a href="<?= Backend::url('zaxbux/securityheaders/csplogs') ?>"><?= e(trans('CSP Reports')) ?></a></li>
+		<li><a href="<?= Backend::url('zaxbux/securityheaders/csplogs') ?>"><?= e(trans('zaxbux.securityheaders::lang.forms.csplogs.name')) ?></a></li>
 		<li><?= e(trans($this->pageTitle)) ?></li>
 	</ul>
 <?php Block::endPut() ?>
@@ -14,7 +14,7 @@
 				<p><?= $formModel->created_at->toDayDateTimeString() ?></p>
 			</div>
 			<div class="scoreboard-item title-value">
-				<h4><?= e(trans('Action')) ?></h4>
+				<h4><?= e(trans('zaxbux.securityheaders::lang.forms.csplogs.action')) ?></h4>
 				<p><?= $formModel->action ?></p>
 			</div>
 		</div>
@@ -24,49 +24,49 @@
 		<table class="table">
 			<tbody>
 				<tr>
-					<th>Blocked URI</th>
+					<th><?= e(trans('zaxbux.securityheaders::lang.forms.csplogs.blocked_uri')); ?></th>
 					<td><?= e($formModel->blocked_uri); ?></td>
 				</tr>
 				<tr>
-					<th>Disposition</th>
+					<th><?= e(trans('zaxbux.securityheaders::lang.forms.csplogs.disposition')); ?></th>
 					<td><?= e($formModel->disposition); ?></td>
 				</tr>
 				<tr>
-					<th>Document URI</th>
+					<th><?= e(trans('zaxbux.securityheaders::lang.forms.csplogs.document_uri')); ?></th>
 					<td><?= e($formModel->document_uri); ?></td>
 				</tr>
 				<tr>
-					<th>Effective Directive</th>
+					<th><?= e(trans('zaxbux.securityheaders::lang.forms.csplogs.effective_directive')); ?></th>
 					<td><?= e($formModel->effective_directive); ?></td>
 				</tr>
 				<tr>
-					<th>Original Policy</th>
+					<th><?= e(trans('zaxbux.securityheaders::lang.forms.csplogs.original_policy')); ?></th>
 					<td><?= e($formModel->original_policy); ?></td>
 				</tr>
 				<tr>
-					<th>Referrer</th>
+					<th><?= e(trans('zaxbux.securityheaders::lang.forms.csplogs.referrer')); ?></th>
 					<td><?= e($formModel->referrer); ?></td>
 				</tr>
 				<tr>
-					<th>Script Sample</th>
+					<th><?= e(trans('zaxbux.securityheaders::lang.forms.csplogs.script_sample')); ?></th>
 					<td><code><?= e($formModel->script_sample); ?></code></td>
 				</tr>
 				<tr>
-					<th>Status Code</th>
+					<th><?= e(trans('zaxbux.securityheaders::lang.forms.csplogs.status_code')); ?></th>
 					<td><?= e($formModel->status_code); ?></td>
 				</tr>
 				<tr>
-					<th>Violated Directive</th>
+					<th><?= e(trans('zaxbux.securityheaders::lang.forms.csplogs.violated_directive')); ?></th>
 					<td><?= e($formModel->violated_directive); ?></td>
 				</tr>
 				<tr>
-					<th>User Agent</th>
+					<th><?= e(trans('zaxbux.securityheaders::lang.forms.csplogs.user_agent')); ?></th>
 					<td>
 						<code><?= e($formModel->user_agent); ?></code>
 					</td>
 				</tr>
 				<tr>
-					<th>Original</th>
+					<th><?= e(trans('zaxbux.securityheaders::lang.forms.csplogs.original')); ?></th>
 					<td>
 						<pre id="csp-report-original"><code><?= $formModel->prettyPrinted(); ?></code></pre>
 					</td>
