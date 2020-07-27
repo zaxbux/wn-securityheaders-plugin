@@ -174,7 +174,7 @@ class HeaderBuilder {
 			$value = [
 				'group' => Config::get('zaxbux.securityheaders::csp_report_to_group', 'csp-endpoint'),
 				'max_age' => Config::get('zaxbux.securityheaders::csp_report_to_max_age', 2592000),
-				'enpoints' => [
+				'endpoints' => [
 					['url' => Url::route('zaxbux.securityheaders.reports.csp_endpoint', ['action' => $action])]
 				]
 			];
