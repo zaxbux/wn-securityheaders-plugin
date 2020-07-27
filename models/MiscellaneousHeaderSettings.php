@@ -22,6 +22,7 @@ class MiscellaneousHeaderSettings extends Model {
 		'frame_options'        => ['in:deny,sameorigin'],
 		'content_type_options' => ['boolean'],
 		'xss_protection'       => ['in:disable,enable,block'],
+		'report_to'            => ['boolean'],
 	];
 
 	public function initSettingsData() {
@@ -29,13 +30,16 @@ class MiscellaneousHeaderSettings extends Model {
 		$this->frame_options        = 'deny';
 		$this->content_type_options = true;
 		$this->xss_protection       = null;
+		$this->report_to            = false;
 	}
 
 	public function afterSave() {
 		// Remove headers from cache
+		Cache::forget(HeaderBuilder::CACHE_KEY_CONTENT_SECURITY_POLICY);
 		Cache::forget(HeaderBuilder::CACHE_KEY_REFERRER_POLICY);
 		Cache::forget(HeaderBuilder::CACHE_KEY_FRAME_OPTIONS);
 		Cache::forget(HeaderBuilder::CACHE_KEY_CONTENT_TYPE_OPTIONS);
 		Cache::forget(HeaderBuilder::CACHE_KEY_XSS_PROTECTION);
+		Cache::forget(HeaderBuilder::CACHE_KEY_REPORT_TO);
 	}
 }

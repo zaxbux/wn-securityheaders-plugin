@@ -77,13 +77,7 @@ class CSPLogs extends Controller {
 	 * @return void
 	 */
 	public function preview($id) {
-		//$this->addCss('/modules/system/assets/css/eventlogs/exception-beautifier.css', 'core');
-		//$this->addJs('/modules/system/assets/js/eventlogs/exception-beautifier.js', 'core');
-
-		//if (in_array(App::environment(), ['dev', 'local'])) {
-		//	$this->addJs('/modules/system/assets/js/eventlogs/exception-beautifier.links.js', 'core');
-		//}
-
+		$this->addCss('/plugins/zaxbux/securityheaders/assets/css/preview.css');
 		$this->addJs('/plugins/zaxbux/securityheaders/assets/js/reports-prettyprint.js');
 
 		return $this->asExtension('FormController')->preview($id);

@@ -1,0 +1,7 @@
+.csp-details-content {
+	overflow-x: scroll;
+}
+
+.csp-details-content table th {
+	min-width: 140px;
+}

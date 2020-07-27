@@ -20,7 +20,7 @@ class ReportsController extends Controller {
 	public function cspEndpoint($action) {
 		Log::CSPReport($action, Request::json()->all(), Request::getContent(), Request::header('User-Agent'));
 
-		return Response::make(null, 204)->header('Content-Type', 'application/json'); // No content
+		return Response::make(null, 204); // No content
 	}
 
 

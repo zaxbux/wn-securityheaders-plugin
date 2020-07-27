@@ -50,7 +50,7 @@
 		'cspsettings' => [
 			'enabled' => [
 				'label' => 'Enable',
-				'comment' => 'Enable the Content-Security-Policy header.',
+				'comment' => 'Enable the Content-Security-Policy header. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank">Learn more</a>',
 			],
 			'report_only' => [
 				'label' => 'Report Only',
@@ -58,7 +58,7 @@
 			],
 			'log_violations' => [
 				'label' => 'Log Violations',
-				'comment' => 'Store policy violation reports from browsers.',
+				'comment' => 'Store policy violation reports from browsers. You should also enable the Report-To header in Miscellaneous Headers, as the report_uri directive is deprecated.',
 			],
 			'upgrade_insecure_requests' => [
 				'label' => 'Upgrade Insecure Requests',
