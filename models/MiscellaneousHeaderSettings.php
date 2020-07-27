@@ -13,7 +13,7 @@ class MiscellaneousHeaderSettings extends Model {
 
 	public $implement = ['System.Behaviors.SettingsModel'];
 
-	public $settingsCode = 'zaxbux_securityheaders_other_headers';
+	public $settingsCode = 'zaxbux_securityheaders_other_header_settings';
 
 	public $settingsFields = 'fields.yaml';
 

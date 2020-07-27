@@ -12,7 +12,7 @@ class CSPSettings extends Model {
 
 	public $implement = ['System.Behaviors.SettingsModel'];
 
-	public $settingsCode = 'zaxbux_securityheaders_cspsettings';
+	public $settingsCode = 'zaxbux_securityheaders_csp_settings';
 
 	public $settingsFields = 'fields.yaml';
 

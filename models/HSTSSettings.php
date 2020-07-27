@@ -12,7 +12,7 @@ class HSTSSettings extends Model {
 
 	public $implement      = ['System.Behaviors.SettingsModel'];
 
-	public $settingsCode   = 'zaxbux_securityheaders_hstssettings';
+	public $settingsCode   = 'zaxbux_securityheaders_hsts_settings';
 
 	public $settingsFields = 'fields.yaml';
 	

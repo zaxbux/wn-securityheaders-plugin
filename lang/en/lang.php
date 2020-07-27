@@ -205,13 +205,13 @@
 				'option_enable' => 'Enable',
 				'option_block' => 'Block',
 			],
-		],
-		'reporting' => [
-			'hint' => 'This log displays a list of potential errors that occur as a result of your content security policy configuration.',
 			'report_to' => [
 				'label' => 'Enable',
 				'comment' => 'This will add a <code>csp-endpoint</code> group that will collect policy violation events <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-to" target="_blank">Learn more</a>',
 			],
+		],
+		'reporting' => [
+			'hint' => 'This log displays a list of potential errors that occur as a result of your content security policy configuration.',
 		],
 	],
 	'columns' => [
