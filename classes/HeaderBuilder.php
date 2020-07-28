@@ -258,7 +258,7 @@ class HeaderBuilder {
 
 		// Report-To support
 		if (MiscellaneousHeaderSettings::get('report_to')) {
-			$directives[] = \sprintf('report-to %s;', self::CSP_REPORT_TO_GROUP);
+			$directives[] = \sprintf('report-to %s', self::CSP_REPORT_TO_GROUP);
 		}
 
 		if (count(array_filter($directives)) > 0) {

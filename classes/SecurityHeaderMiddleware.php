@@ -53,7 +53,6 @@ class SecurityHeaderMiddleware {
 		HeaderBuilder::addFrameOptions($response);
 		HeaderBuilder::addContentTypeOptions($response);
 		HeaderBuilder::addXSSProtection($response);
-		HeaderBuilder::addReportTo($response);
 	}
 
 	/**
