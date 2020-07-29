@@ -138,4 +138,8 @@ class Plugin extends PluginBase {
 			],
 		];
 	}
+
+	public function register() {
+		$this->registerConsoleCommand('zaxbux.securityheaders.disable_csp', Zaxbux\SecurityHeaders\Console\DisableCSP::class);
+	}
 }
