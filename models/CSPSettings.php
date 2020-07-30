@@ -34,5 +34,6 @@ class CSPSettings extends Model {
 	public function afterSave() {
 		// Remove headers from cache
 		Cache::forget(HeaderBuilder::CACHE_KEY_CONTENT_SECURITY_POLICY);
+		Cache::forget(HeaderBuilder::CACHE_KEY_REPORT_TO);
 	}
 }

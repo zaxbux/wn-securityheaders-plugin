@@ -7,6 +7,9 @@ use Zaxbux\SecurityHeaders\Classes\CSPFormBuilder;
 
 
 class Plugin extends PluginBase {
+
+	const REPORT_URI = '/_/reports/csp-endpoint/{action}';
+
 	/**
 	 * @var bool Plugin requires elevated permissions.
 	 * Necessary to alter headers on combined assets (/combine)

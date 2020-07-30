@@ -13,9 +13,22 @@ This plugin generates a cryptographic nonce (128 bits, base64 encoded) for each 
 </script>
 ```
 
+## In Case Things Break
+Enabling the Content Security Policy header or the Strict Transport Security (HSTS) header could break your site if they're not setup properly. In each case, there is a command to disable the headers.
+
+To disable the CSP from the console:
+```
+artisan securityheaders:disable_csp
+```
+
+To disable HSTS from the console:
+```
+artisan securityheaders:disable_hsts
+```
+
 ## Headers by Controller
 
-Different headers are applied to different routes, based on the controller used. The **System** and **Backend** controllers have limited security headers to avoid breaking functionality.
+Different headers are applied to different routes, based on the controller used. The **System** and **Backend** controllers have limited security headers to avoid breaking functionality. For exmaple, the backend would require adding the `unsafe-inline` directive, effectivley making a CSP policy useless, so that header is not added.
 
 ### System
 
