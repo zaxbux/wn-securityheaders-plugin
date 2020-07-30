@@ -1,4 +1,6 @@
-<?php namespace Acme\Blog\Console;
+<?php
+
+namespace Zaxbux\SecurityHeaders\Console;
 
 use Cache;
 use Illuminate\Console\Command;
