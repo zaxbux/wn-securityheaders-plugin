@@ -283,7 +283,7 @@ class HeaderBuilder {
 				continue;
 			}
 
-			if ($source == 'nonce-source' && $data == true) {
+			if ($source == 'nonce_source' && $data == true) {
 				// %1$s is replaced with the nonce on every response
 				$sources[] = "'nonce-%1\$s'";
 
@@ -292,7 +292,7 @@ class HeaderBuilder {
 
 			// For checkboxes
 			if ($data == true) {
-				$sources[] = \sprintf("'%s'", $source);
+				$sources[] = \sprintf("'%s'", \str_replace('_', '-', $source));
 			}
 		}
 
