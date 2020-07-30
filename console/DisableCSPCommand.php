@@ -34,20 +34,4 @@ class DisableCSPCommand extends Command {
 		$this->output->writeln('CSP disabled.');
 	}
 
-	/**
-	 * Get the console command arguments.
-	 * @return array
-	 */
-	protected function getArguments() {
-		return [];
-	}
-
-	/**
-	 * Get the console command options.
-	 * @return array
-	 */
-	protected function getOptions() {
-		return [];
-	}
-
 }

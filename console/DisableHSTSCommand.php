@@ -34,20 +34,4 @@ class DisableHSTSCommand extends Command {
 		$this->output->writeln('HSTS disabled.');
 	}
 
-	/**
-	 * Get the console command arguments.
-	 * @return array
-	 */
-	protected function getArguments() {
-		return [];
-	}
-
-	/**
-	 * Get the console command options.
-	 * @return array
-	 */
-	protected function getOptions() {
-		return [];
-	}
-
 }
