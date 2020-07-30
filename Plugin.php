@@ -143,7 +143,7 @@ class Plugin extends PluginBase {
 		/*
 		 * Register console commands
 		 */
-		$this->registerConsoleCommand('zaxbux.securityheaders.disable_csp', Zaxbux\SecurityHeaders\Console\DisableCSPCommand::class);
-		$this->registerConsoleCommand('zaxbux.securityheaders.disable_hsts', Zaxbux\SecurityHeaders\Console\DisableHSTSCommand::class);
+		$this->registerConsoleCommand('zaxbux.securityheaders.disable_csp', \Zaxbux\SecurityHeaders\Console\DisableCSPCommand::class);
+		$this->registerConsoleCommand('zaxbux.securityheaders.disable_hsts', \Zaxbux\SecurityHeaders\Console\DisableHSTSCommand::class);
 	}
 }
