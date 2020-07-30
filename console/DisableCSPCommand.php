@@ -31,7 +31,7 @@ class DisableCSPCommand extends Command {
 		// Disable
 		CSPSettings::set('enabled', false);
 
-		$this->output->writeln('CSP policy disabled.');
+		$this->output->writeln('CSP disabled.');
 	}
 
 	/**
