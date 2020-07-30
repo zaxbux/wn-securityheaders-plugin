@@ -7,11 +7,11 @@ use Symfony\Component\Console\Input\InputArgument;
 use Zaxbux\SecurityHeaders\Classes\HeaderBuilder;
 use Zaxbux\SecurityHeaders\Models\CSPSettings;
 
-class CSPDisable extends Command {
+class DisableCSPCommand extends Command {
 	/**
 	 * @var string The console command name.
 	 */
-	protected $name = 'securityheaders:csp_disable';
+	protected $name = 'securityheaders:disable_csp';
 
 	/**
 	 * @var string The console command description.
