@@ -117,8 +117,8 @@ class HeaderBuilder {
 	 */
 	public static function addContentTypeOptions(Response $response) {
 		$header = Cache::rememberForever(self::CACHE_KEY_CONTENT_TYPE_OPTIONS, function() {
-			if ($value = MiscellaneousHeaderSettings::get('content_type_options')) {
-				return new HttpHeader('X-Content-Type-Options', $value);
+			if (MiscellaneousHeaderSettings::get('content_type_options', false) == true) {
+				return new HttpHeader('X-Content-Type-Options', 'nosniff');
 			}
 
 			return false;
@@ -208,8 +208,6 @@ class HeaderBuilder {
 		foreach (CSPFormBuilder::CSP_DIRECTIVES['navigation'] as $directive) {
 			$sourceBasedDirectives[] = $directive['name'];
 		}
-
-		//var_dump($sourceBasedDirectives); die();
 
 		foreach ($sourceBasedDirectives as $sourceBasedDirective) {
 			if ($sourceData = CSPSettings::get(\str_replace('-', '_', $sourceBasedDirective))) {
