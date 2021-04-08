@@ -7,19 +7,29 @@ class TableCreateZaxbuxSecurityheadersReportingCsp extends Migration
 {
     public function up()
     {
-        Schema::table('zaxbux_securityheaders_reporting_csp', function($table)
+        Schema::create('zaxbux_securityheaders_reporting_csp', function($table)
         {
-            $table->text('blocked_uri')->nullable()->change();
-            $table->text('document_uri')->nullable()->change();
+            $table->engine = 'InnoDB';
+            $table->increments('id')->unsigned();
+            $table->text('original_data')->nullable();
+            $table->string('action', 16)->nullable();
+            $table->string('blocked_uri')->nullable();
+            $table->string('disposition', 16)->nullable();
+            $table->string('document_uri')->nullable();
+            $table->text('effective_directive')->nullable();
+            $table->text('original_policy')->nullable();
+            $table->string('referrer')->nullable();
+            $table->string('script_sample', 128)->nullable();
+            $table->smallInteger('status_code')->nullable()->unsigned();
+            $table->text('violated_directive')->nullable();
+            $table->text('user_agent', 1024)->nullable();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
     
     public function down()
     {
-        Schema::table('zaxbux_securityheaders_reporting_csp', function($table)
-        {
-            $table->string('blocked_uri')->nullable()->change();
-            $table->string('document_uri')->nullable()->change();
-        });
+        Schema::dropIfExists('zaxbux_securityheaders_reporting_csp');
     }
 }
