@@ -1,6 +1,7 @@
 {
     "name": "zaxbux/securityheaders",
     "description": "Easily configure HTTP response headers to increase site security.",
+    "version": "1.0.5",
     "type": "october-plugin",
     "license": "MIT",
     "authors": [
