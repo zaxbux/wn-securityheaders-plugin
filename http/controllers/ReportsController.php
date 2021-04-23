@@ -1,6 +1,4 @@
-<?php
-
-namespace Zaxbux\SecurityHeaders\Http\Controllers;
+<?php namespace Zaxbux\SecurityHeaders\Http\Controllers;
 
 use Request;
 use Response;
@@ -22,6 +20,4 @@ class ReportsController extends Controller {
 
 		return Response::make(null, 204); // No content
 	}
-
-
 }

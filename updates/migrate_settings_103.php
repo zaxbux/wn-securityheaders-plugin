@@ -2,7 +2,7 @@
 
 use DB;
 use Cache;
-use October\Rain\Database\Updates\Migration;
+use Winter\Storm\Database\Updates\Migration;
 
 class MigrateSettings103 extends Migration {
 	public function up() {

@@ -3,23 +3,22 @@
  */
 
 +function ($) { "use strict";
+	var CSPReportDetails = function () {
+		this.init()
+	}
 
-    var CSPReportDetails = function () {
-        this.init()
-    }
+	CSPReportDetails.prototype.init = function() {
 
-    CSPReportDetails.prototype.init = function() {
+		$(document).ready(function() {
+			$('.csp-details-content pre').addClass('prettyprint')
+			prettyPrint()
+		})
 
-        $(document).ready(function() {
-            $('.csp-details-content pre').addClass('prettyprint')
-            prettyPrint()
-        })
+	}
 
-    }
+	if ($.zaxbux === undefined)
+		$.zaxbux = {}
 
-    if ($.oc === undefined)
-        $.oc = {}
-
-    $.oc.reportDetails = new CSPReportDetails;
+	$.zaxbux.reportDetails = new CSPReportDetails;
 
 }(window.jQuery);

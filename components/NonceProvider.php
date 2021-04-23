@@ -1,6 +1,4 @@
-<?php
-
-namespace Zaxbux\SecurityHeaders\Components;
+<?php namespace Zaxbux\SecurityHeaders\Components;
 
 use Request;
 use Cms\Classes\ComponentBase;
@@ -9,14 +7,13 @@ class NonceProvider extends ComponentBase {
 
 	const SHORT_NAME = 'CSPNonce';
 
-	// `string` property
 	public $nonce;
 
 	public function componentDetails() {
-        return [
-            'name'        => 'zaxbux.securityheaders::lang.components.CSPNonce.name',
-            'description' => 'zaxbux.securityheaders::lang.components.CSPNonce.description'
-        ];
+		return [
+			'name'        => 'zaxbux.securityheaders::lang.components.CSPNonce.name',
+			'description' => 'zaxbux.securityheaders::lang.components.CSPNonce.description'
+		];
 	}
 
 	public function init() {

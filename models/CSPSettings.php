@@ -1,14 +1,12 @@
-<?php
-
-namespace Zaxbux\SecurityHeaders\Models;
+<?php namespace Zaxbux\SecurityHeaders\Models;
 
 use Model;
 use Cache;
-use October\Rain\Exception\ValidationException;
+use Winter\Storm\Exception\ValidationException;
 use Zaxbux\SecurityHeaders\Classes\HeaderBuilder;
 
 class CSPSettings extends Model {
-	use \October\Rain\Database\Traits\Validation;
+	use \Winter\Storm\Database\Traits\Validation;
 
 	public $implement = ['System.Behaviors.SettingsModel'];
 
@@ -27,7 +25,9 @@ class CSPSettings extends Model {
 
 	public function beforeValidate() {
 		if ($this->block_all_mixed_content && $this->upgrade_insecure_requests) {
-			throw new ValidationException(['block_all_mixed_content' => 'Cannot enable Block All Mixed Content and Upgrade Insecure Requests at the same time.']);
+			throw new ValidationException([
+				'block_all_mixed_content' => 'Cannot enable Block All Mixed Content and Upgrade Insecure Requests at the same time.'
+			]);
 		}
 	}
 

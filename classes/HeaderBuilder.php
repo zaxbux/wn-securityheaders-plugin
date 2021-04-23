@@ -4,13 +4,13 @@ namespace Zaxbux\SecurityHeaders\Classes;
 
 use Url;
 use Cache;
-use Config;
 use Illuminate\Http\Response;
 use Zaxbux\SecurityHeaders\Classes\HttpHeader;
 use Zaxbux\SecurityHeaders\Classes\CSPFormBuilder;
 use Zaxbux\SecurityHeaders\Models\CSPSettings;
 use Zaxbux\SecurityHeaders\Models\HSTSSettings;
 use Zaxbux\SecurityHeaders\Models\MiscellaneousHeaderSettings;
+use Zaxbux\SecurityHeaders\Http\Controllers\ReportsController;
 
 class HeaderBuilder {
 
@@ -26,11 +26,11 @@ class HeaderBuilder {
 
 	/**
 	 * Add the Content-Security-Policy or Content-Security-Policy-Report-Only header to the response
-	 * 
+	 *
 	 * @param Illuminate\Http\Response
 	 */
 	public static function addContentSecurityPolicy(Response $response, $nonce) {
-		$header = Cache::rememberForever(self::CACHE_KEY_CONTENT_SECURITY_POLICY, function() {
+		$header = Cache::rememberForever(self::CACHE_KEY_CONTENT_SECURITY_POLICY, function () {
 			if (!CSPSettings::get('enabled')) {
 				return false;
 			}
@@ -45,11 +45,11 @@ class HeaderBuilder {
 
 	/**
 	 * Add the Strict-Transport-Security header to the response
-	 * 
+	 *
 	 * @param Illuminate\Http\Response
 	 */
 	public static function addStrictTransportSecurity(Response $response) {
-		$header = Cache::rememberForever(self::CACHE_KEY_STRICT_TRANSPORT_SECURITY, function() {
+		$header = Cache::rememberForever(self::CACHE_KEY_STRICT_TRANSPORT_SECURITY, function () {
 			if (!HSTSSettings::get('enabled')) {
 				return false;
 			}
@@ -59,7 +59,7 @@ class HeaderBuilder {
 			if (HSTSSettings::get('subdomains')) {
 				$value .= '; includeSubDomains';
 			}
-	
+
 			if (HSTSSettings::get('preload')) {
 				$value .= '; preload';
 			}
@@ -74,11 +74,11 @@ class HeaderBuilder {
 
 	/**
 	 * Add the Referrer-Policy header to the response
-	 * 
+	 *
 	 * @param Illuminate\Http\Response
 	 */
 	public static function addReferrerPolicy(Response $response) {
-		$header = Cache::rememberForever(self::CACHE_KEY_REFERRER_POLICY, function() {
+		$header = Cache::rememberForever(self::CACHE_KEY_REFERRER_POLICY, function () {
 			if ($value = MiscellaneousHeaderSettings::get('referrer_policy')) {
 				return new HttpHeader('Referrer-Policy', $value);
 			}
@@ -93,11 +93,11 @@ class HeaderBuilder {
 
 	/**
 	 * Add the Frame-options header to the response
-	 * 
+	 *
 	 * @param Illuminate\Http\Response
 	 */
 	public static function addFrameOptions(Response $response) {
-		$header = Cache::rememberForever(self::CACHE_KEY_FRAME_OPTIONS, function() {
+		$header = Cache::rememberForever(self::CACHE_KEY_FRAME_OPTIONS, function () {
 			if ($value = MiscellaneousHeaderSettings::get('frame_options')) {
 				return new HttpHeader('X-Frame-Options', $value);
 			}
@@ -112,11 +112,11 @@ class HeaderBuilder {
 
 	/**
 	 * Add the X-Content-Type-Options header to the response
-	 * 
+	 *
 	 * @param Illuminate\Http\Response
 	 */
 	public static function addContentTypeOptions(Response $response) {
-		$header = Cache::rememberForever(self::CACHE_KEY_CONTENT_TYPE_OPTIONS, function() {
+		$header = Cache::rememberForever(self::CACHE_KEY_CONTENT_TYPE_OPTIONS, function () {
 			if (MiscellaneousHeaderSettings::get('content_type_options', false) == true) {
 				return new HttpHeader('X-Content-Type-Options', 'nosniff');
 			}
@@ -131,11 +131,11 @@ class HeaderBuilder {
 
 	/**
 	 * Add the X-XSS-Protection header to the response
-	 * 
+	 *
 	 * @param Illuminate\Http\Response
 	 */
 	public static function addXSSProtection(Response $response) {
-		$header = Cache::rememberForever(self::CACHE_KEY_XSS_PROTECTION, function() {
+		$header = Cache::rememberForever(self::CACHE_KEY_XSS_PROTECTION, function () {
 			$value = MiscellaneousHeaderSettings::get('xss_protection');
 
 			switch ($value) {
@@ -162,16 +162,17 @@ class HeaderBuilder {
 
 	/**
 	 * Add the X-XSS-Protection header to the response
-	 * 
+	 *
 	 * @param Illuminate\Http\Response
 	 */
 	public static function addReportTo(Response $response) {
-		$header = Cache::rememberForever(self::CACHE_KEY_REPORT_TO, function() {
+		$header = Cache::rememberForever(self::CACHE_KEY_REPORT_TO, function () {
 			if (!MiscellaneousHeaderSettings::get('report_to')) {
 				return false;
 			}
 
-			$action = CSPSettings::get('report_only') ? \Zaxbux\SecurityHeaders\Http\Controllers\ReportsController::ACTION_REPORT : \Zaxbux\SecurityHeaders\Http\Controllers\ReportsController::ACTION_ENFORCE;
+			$action = CSPSettings::get('report_only') ?
+				ReportsController::ACTION_REPORT : ReportsController::ACTION_ENFORCE;
 
 			$value = [
 				'group' => self::CSP_REPORT_TO_GROUP,
@@ -262,7 +263,7 @@ class HeaderBuilder {
 		if (count(array_filter($directives)) > 0) {
 			return $header->setValue(\join(' ', $directives));
 		}
-		
+
 		return false;
 	}
 

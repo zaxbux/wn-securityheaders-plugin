@@ -1,11 +1,9 @@
-<?php
+<?php namespace Zaxbux\SecurityHeaders\Classes;
 
-namespace Zaxbux\SecurityHeaders\Classes;
-
-use Route;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Route;
 use Zaxbux\SecurityHeaders\Classes\HeaderBuilder;
 
 class SecurityHeaderMiddleware {
@@ -15,7 +13,7 @@ class SecurityHeaderMiddleware {
 	 *
 	 * @return mixed
 	 */
-	public function handle($request, Closure $next) {
+	public function handle($request, Closure $next): mixed {
 
 		$response = $next($request);
 
@@ -45,10 +43,10 @@ class SecurityHeaderMiddleware {
 
 	/**
 	 * Set headers for combined assets
-	 * 
+	 *
 	 * @param \Illuminate\Http\Response $response
 	 */
-	private function setSystemControllerHeaders(Response $response) {
+	private function setSystemControllerHeaders(Response $response): void {
 		HeaderBuilder::addStrictTransportSecurity($response);
 		HeaderBuilder::addFrameOptions($response);
 		HeaderBuilder::addContentTypeOptions($response);
@@ -57,20 +55,20 @@ class SecurityHeaderMiddleware {
 
 	/**
 	 * Set headers for combined assets
-	 * 
+	 *
 	 * @param \Illuminate\Http\Response $response
 	 */
-	private function setBackendControllerHeaders(Response $response) {
+	private function setBackendControllerHeaders(Response $response): void {
 		$this->setSystemControllerHeaders($response);
 	}
 
 	/**
 	 * Set headers for combined assets
-	 * 
+	 *
 	 * @param \Illuminate\Http\Response $response
 	 * @param string $nonce
 	 */
-	private function setCmsControllerHeaders(Response $response, $nonce) {
+	private function setCmsControllerHeaders(Response $response, $nonce): void {
 		HeaderBuilder::addContentSecurityPolicy($response, $nonce);
 		HeaderBuilder::addStrictTransportSecurity($response);
 		HeaderBuilder::addReferrerPolicy($response);
@@ -86,10 +84,8 @@ class SecurityHeaderMiddleware {
 	 *
 	 * @param \Illuminate\Http\Request $request
 	 * @param \Illuminate\Http\Response $response
-	 *
-	 * @return bool
 	 */
-	protected function isRelevant($request, $response) {
+	protected function isRelevant(Request $request, Response $response): bool {
 		// Only default responses, no redirects
 		if (!$response instanceof Response) {
 			return false;

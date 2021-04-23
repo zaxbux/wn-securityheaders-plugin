@@ -1,11 +1,7 @@
-<?php
-
-namespace Zaxbux\SecurityHeaders\Console;
+<?php namespace Zaxbux\SecurityHeaders\Console;
 
 use Cache;
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 use Zaxbux\SecurityHeaders\Classes\HeaderBuilder;
 use Zaxbux\SecurityHeaders\Models\HSTSSettings;
 
@@ -33,5 +29,4 @@ class DisableHSTSCommand extends Command {
 
 		$this->output->writeln('HSTS disabled.');
 	}
-
 }

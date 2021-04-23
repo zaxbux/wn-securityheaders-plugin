@@ -1,20 +1,16 @@
-<?php
+<?php namespace Zaxbux\SecurityHeaders\Classes;
 
-namespace Zaxbux\SecurityHeaders\Classes;
-
-//use Route;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class CSPEndpointMiddleware {
 	/**
-	 * @param  \Illuminate\Http\Request $request
-	 * @param  \Closure                 $next
+	 * @param  Request $request
+	 * @param  Closure                 $next
 	 *
 	 * @return mixed
 	 */
-	public function handle($request, Closure $next) {
+	public function handle(Request $request, Closure $next) {
 		// Check for valid content-type
 		$validContentTypes = [
 			'application/json',

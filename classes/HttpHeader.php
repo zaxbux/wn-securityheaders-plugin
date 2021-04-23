@@ -1,6 +1,4 @@
-<?php
-
-namespace Zaxbux\SecurityHeaders\Classes;
+<?php namespace Zaxbux\SecurityHeaders\Classes;
 
 class HttpHeader {
 	private $name;
@@ -13,7 +11,7 @@ class HttpHeader {
 
 	/**
 	 * Get header name
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getName() {
@@ -22,7 +20,7 @@ class HttpHeader {
 
 	/**
 	 * Get header value
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getValue() {
@@ -31,7 +29,7 @@ class HttpHeader {
 
 	/**
 	 * Set header name
-	 * 
+	 *
 	 * @param string $name
 	 * @return HttpHeader
 	 */
@@ -43,7 +41,7 @@ class HttpHeader {
 
 	/**
 	 * Set header value
-	 * 
+	 *
 	 * @param string $value
 	 * @return HttpHeader
 	 */

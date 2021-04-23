@@ -5,9 +5,8 @@ use Model;
 /**
  * Model
  */
-class CSPLog extends Model
-{
-	use \October\Rain\Database\Traits\Validation;
+class CSPLog extends Model {
+	use \Winter\Storm\Database\Traits\Validation;
 	
 
 	/**

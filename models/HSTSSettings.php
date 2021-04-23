@@ -1,14 +1,11 @@
-<?php
-
-namespace Zaxbux\SecurityHeaders\Models;
+<?php namespace Zaxbux\SecurityHeaders\Models;
 
 use Model;
 use Cache;
-use October\Rain\Exception\ValidationException;
 use Zaxbux\SecurityHeaders\Classes\HeaderBuilder;
 
 class HSTSSettings extends Model {
-	use \October\Rain\Database\Traits\Validation;
+	use \Winter\Storm\Database\Traits\Validation;
 
 	public $implement      = ['System.Behaviors.SettingsModel'];
 

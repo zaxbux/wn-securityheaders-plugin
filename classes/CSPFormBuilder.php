@@ -1,6 +1,4 @@
-<?php
-
-namespace Zaxbux\SecurityHeaders\Classes;
+<?php namespace Zaxbux\SecurityHeaders\Classes;
 
 class CSPFormBuilder {
 
@@ -408,7 +406,6 @@ class CSPFormBuilder {
 	const LANG_PREFIX = 'zaxbux.securityheaders::lang.fields.cspsettings.';
 
 	public function __construct() {
-
 	}
 
 	public function makeForm($widget) {
@@ -444,13 +441,12 @@ class CSPFormBuilder {
 		}
 	}
 
-	private function getFieldConfig($directive, $grammarName) {
+	private static function getFieldConfig($directive, $grammarName) {
 		$fields = [];
 		$grammarData = self::CSP_GRAMMAR[$grammarName];
 
 		// Template needed
 		if (\key_exists('template', $grammarData) && \key_exists('field_config', $grammarData)) {
-			
 			$template = self::FIELD_TEMPLATES[$grammarData['template']];
 
 			$config = array_merge($template, $grammarData['field_config']);

@@ -19,8 +19,7 @@
 		"winter/storm": "dev-develop@dev",
 		"winter/wn-system-module": "dev-develop@dev",
 		"winter/wn-backend-module": "dev-develop@dev",
-		"winter/wn-cms-module": "dev-develop@dev",
-		"barryvdh/laravel-ide-helper": "2.8.2"
+		"winter/wn-cms-module": "dev-develop@dev"
 	},
 	"extra": {
 		"installer-paths": {

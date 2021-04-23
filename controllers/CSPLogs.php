@@ -1,6 +1,4 @@
-<?php
-
-namespace Zaxbux\SecurityHeaders\Controllers;
+<?php namespace Zaxbux\SecurityHeaders\Controllers;
 
 use Lang;
 use Flash;
@@ -40,7 +38,7 @@ class CSPLogs extends Controller {
 	public function __construct() {
 		parent::__construct();
 
-		BackendMenu::setContext('October.System', 'system', 'settings');
+		BackendMenu::setContext('Winter.System', 'system', 'settings');
 		SettingsManager::setContext('Zaxbux.SecurityHeaders', 'csp_logs');
 	}
 

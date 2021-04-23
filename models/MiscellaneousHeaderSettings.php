@@ -1,15 +1,12 @@
-<?php
-
-namespace Zaxbux\SecurityHeaders\Models;
+<?php namespace Zaxbux\SecurityHeaders\Models;
 
 use Model;
 use Cache;
-use October\Rain\Exception\ValidationException;
 use Zaxbux\SecurityHeaders\Classes\HeaderBuilder;
 
 class MiscellaneousHeaderSettings extends Model {
 	
-	use \October\Rain\Database\Traits\Validation;
+	use \Winter\Storm\Database\Traits\Validation;
 
 	public $implement = ['System.Behaviors.SettingsModel'];
 
@@ -18,7 +15,9 @@ class MiscellaneousHeaderSettings extends Model {
 	public $settingsFields = 'fields.yaml';
 
 	public $rules = [
-		'referrer_policy'      => ['in:no-referrer,no-referrer-when-downgrade,origin,origin-when-cross-origin,same-origin,strict-origin,strict-origin-when-cross-origin,unsafe-url'],
+		'referrer_policy'      => [
+			'in:no-referrer,no-referrer-when-downgrade,origin,origin-when-cross-origin,same-origin,strict-origin,strict-origin-when-cross-origin,unsafe-url',
+		],
 		'frame_options'        => ['in:deny,sameorigin'],
 		'content_type_options' => ['boolean'],
 		'xss_protection'       => ['in:disable,enable,block'],

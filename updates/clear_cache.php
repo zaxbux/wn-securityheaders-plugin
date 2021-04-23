@@ -1,8 +1,7 @@
 <?php namespace Zaxbux\SecurityHeaders\Updates;
 
-use DB;
 use Cache;
-use October\Rain\Database\Updates\Migration;
+use Winter\Storm\Database\Updates\Migration;
 use Zaxbux\SecurityHeaders\Classes\HeaderBuilder;
 
 class ClearCache extends Migration {

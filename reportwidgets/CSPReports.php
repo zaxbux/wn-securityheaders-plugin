@@ -1,6 +1,4 @@
-<?php
-
-namespace Zaxbux\SecurityHeaders\ReportWidgets;
+<?php namespace Zaxbux\SecurityHeaders\ReportWidgets;
 
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -107,6 +105,6 @@ class CSPReports extends ReportWidgetBase {
 	}
 
 	private static function formatData($points) {
-		return str_replace('"', '', substr(substr(json_encode($points), 1), 0, -1));;
+		return str_replace('"', '', substr(substr(json_encode($points), 1), 0, -1));
 	}
 }

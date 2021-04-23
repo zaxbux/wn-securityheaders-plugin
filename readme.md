@@ -1,6 +1,6 @@
 # Security Headers
 
-This October CMS plugin allows you to manage a variety of security HTTP headers for your application.
+This Winter CMS plugin allows you to manage a variety of security HTTP headers for your application.
 
 See your score at [securityheaders.com](https://securityheaders.com/)
 

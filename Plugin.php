@@ -1,10 +1,8 @@
 <?php namespace Zaxbux\SecurityHeaders;
 
-use Yaml;
 use Backend;
 use System\Classes\PluginBase;
 use Zaxbux\SecurityHeaders\Classes\CSPFormBuilder;
-
 
 class Plugin extends PluginBase {
 
@@ -146,7 +144,7 @@ class Plugin extends PluginBase {
 		/*
 		 * Register console commands
 		 */
-		$this->registerConsoleCommand('zaxbux.securityheaders.disable_csp', \Zaxbux\SecurityHeaders\Console\DisableCSPCommand::class);
-		$this->registerConsoleCommand('zaxbux.securityheaders.disable_hsts', \Zaxbux\SecurityHeaders\Console\DisableHSTSCommand::class);
+		$this->registerConsoleCommand('zaxbux.securityheaders.disable_csp', Console\DisableCSPCommand::class);
+		$this->registerConsoleCommand('zaxbux.securityheaders.disable_hsts', Console\DisableHSTSCommand::class);
 	}
 }
