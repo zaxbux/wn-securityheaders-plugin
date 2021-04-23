@@ -1,3 +1,6 @@
-/.winter/
 /vendor/
+.winter
+.vscode
+
 _ide_helper.php
+composer.lock
