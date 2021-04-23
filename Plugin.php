@@ -6,7 +6,7 @@ use Zaxbux\SecurityHeaders\Classes\CSPFormBuilder;
 
 class Plugin extends PluginBase {
 
-	const REPORT_URI = '/_/reports/csp-endpoint/{action}';
+	const CSP_REPORT_URI = '/_/reports/csp-endpoint/{action}';
 
 	/**
 	 * @var bool Plugin requires elevated permissions.
