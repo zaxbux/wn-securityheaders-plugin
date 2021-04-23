@@ -50,11 +50,11 @@
 		'cspsettings' => [
 			'enabled' => [
 				'label' => 'Enable',
-				'comment' => 'Enable the Content-Security-Policy header. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank">Learn more</a>',
+				'comment' => 'Enable the Content-Security-Policy header. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank" rel="noopener">Learn more</a>',
 			],
 			'report_only' => [
 				'label' => 'Report Only',
-				'comment' => 'Monitor, but do not enforce the Content-Security-Policy header. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only" target="_blank">Learn more</a>',
+				'comment' => 'Monitor, but do not enforce the Content-Security-Policy header. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only" target="_blank" rel="noopener">Learn more</a>',
 			],
 			'log_violations' => [
 				'label' => 'Log Violations',
@@ -62,11 +62,11 @@
 			],
 			'upgrade_insecure_requests' => [
 				'label' => 'Upgrade Insecure Requests',
-				'comment' => '<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests" target="_blank">Learn more</a>',
+				'comment' => '<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests" target="_blank" rel="noopener">Learn more</a>',
 			],
 			'block_all_mixed_content' => [
 				'label' => 'Block All Mixed Content',
-				'comment' => '<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content" target="_blank">Learn more</a>',
+				'comment' => '<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content" target="_blank" rel="noopener">Learn more</a>',
 			],
 			'tab_default-src' => 'default-src',
 			'tab_child-src' => 'child-src',
@@ -118,7 +118,7 @@
 			],
 			'sandbox' => [
 				'label' => 'sandbox',
-				'comment' => 'Apply restrictions to a page\'s actions. This is ignored in Report-Only mode. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/sandbox" target="_blank">Learn more</a>',
+				'comment' => 'Apply restrictions to a page\'s actions. This is ignored in Report-Only mode. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/sandbox" target="_blank" rel="noopener">Learn more</a>',
 				'allow-forms' => 'Allows the resource to submit forms. If this keyword is not used, form submission is blocked.',
 				'allow-modals' => 'Lets the resource open modal windows.',
 				'allow-orientation-lock' => 'Lets the resource lock the screen orientation.',
@@ -161,7 +161,7 @@
 		'hstssettings' => [
 			'enabled' => [
 				'label' => 'Enable HTTP Strict Transport Security (HSTS)',
-				'comment' => '<strong class="text-danger">Caution:</strong> If misconfigured, this can make your website inaccessible to users for an extended period of time. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security" target="_blank">Learn more</a>'
+				'comment' => '<strong class="text-danger">Caution:</strong> If misconfigured, this can make your website inaccessible to users for an extended period of time. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security" target="_blank" rel="noopener">Learn more</a>'
 			],
 			'max_age' => [
 				'label' => 'Max Age',
@@ -188,30 +188,36 @@
 			'_unset' => '-- unset --',
 			'referrer_policy' => [
 				'label' => 'Referrer-Policy',
-				'comment' => 'Recommended: <strong>strict-origin-when-cross-origin</strong>. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy" target="_blank">Learn more</a>',
+				'comment' => 'Recommended: <strong>strict-origin-when-cross-origin</strong>. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy" target="_blank" rel="noopener">Learn more</a>',
 			],
 			'frame_options' => [
 				'label' => 'X-Frame-Options',
-				'comment' => 'Recommended: <strong>deny</strong>. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options" target="_blank">Learn more</a>',
+				'comment' => 'Recommended: <strong>deny</strong>. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options" target="_blank" rel="noopener">Learn more</a>',
 			],
 			'content_type_options' => [
 				'label' => 'Enable X-Content-Type-Options "nosniff"',
-				'comment' => 'Recommended: <strong>On</strong>. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options" target="_blank">Learn more</a>',
+				'comment' => 'Recommended: <strong>On</strong>. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options" target="_blank" rel="noopener">Learn more</a>',
 			],
 			'xss_protection' => [
 				'label' => 'X-XSS-Protection',
-				'comment' => 'This header is deprecated, recommended: <strong>unset</strong>. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection" target="_blank">Learn more</a>',
+				'comment' => 'This header is deprecated, recommended: <strong>unset</strong>. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection" target="_blank" rel="noopener">Learn more</a>',
 				'option_disable' => 'Disable',
 				'option_enable' => 'Enable',
 				'option_block' => 'Block',
 			],
 			'report_to' => [
 				'label' => 'Enable',
-				'comment' => 'This will add a <code>csp-endpoint</code> group that will collect policy violation events <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-to" target="_blank">Learn more</a>',
+				'comment' => 'This will add a <code>csp-endpoint</code> group that will collect policy violation events <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-to" target="_blank" rel="noopener">Learn more</a>',
 			],
 		],
 		'reporting' => [
 			'hint' => 'This log displays a list of potential errors that occur as a result of your content security policy configuration.',
+		],
+		'permissionsPolicy' => [
+			'enabled' => [
+				'label' => 'Enable the Permissions-Policy header',
+				'comment' => '<strong class="text-warning">Heads up:</strong> This is an experimental feature. <a href="https://github.com/w3c/webappsec-permissions-policy" target="_blank" rel="noopener">Learn more</a>'
+			],
 		],
 	],
 	'columns' => [
