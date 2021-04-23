@@ -1,9 +1,9 @@
 <?php namespace Zaxbux\SecurityHeaders\Classes;
 
+use Route;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Route;
 use Zaxbux\SecurityHeaders\Classes\HeaderBuilder;
 
 class SecurityHeaderMiddleware {
@@ -13,7 +13,7 @@ class SecurityHeaderMiddleware {
 	 *
 	 * @return mixed
 	 */
-	public function handle($request, Closure $next): mixed {
+	public function handle($request, Closure $next) {
 
 		$response = $next($request);
 
@@ -68,7 +68,7 @@ class SecurityHeaderMiddleware {
 	 * @param \Illuminate\Http\Response $response
 	 * @param string $nonce
 	 */
-	private function setCmsControllerHeaders(Response $response, $nonce): void {
+	private function setCmsControllerHeaders(Response $response, string $nonce): void {
 		HeaderBuilder::addContentSecurityPolicy($response, $nonce);
 		HeaderBuilder::addStrictTransportSecurity($response);
 		HeaderBuilder::addReferrerPolicy($response);
@@ -76,6 +76,8 @@ class SecurityHeaderMiddleware {
 		HeaderBuilder::addContentTypeOptions($response);
 		HeaderBuilder::addXSSProtection($response);
 		HeaderBuilder::addReportTo($response);
+		HeaderBuilder::addPermissionsPolicyHeader($response);
+		HeaderBuilder::addFeaturePolicyHeader($response);
 	}
 
 	/**

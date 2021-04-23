@@ -24,7 +24,11 @@
 		'report_to' => [
 			'label' => 'Reporting',
 			'description' => 'Configure the Report-To header.',
-		]
+		],
+		'permissionsPolicy' => [
+			'label' => 'Permissions Policy',
+			'description' => 'Configure the Permissions-Policy header.',
+		],
 	],
 	'components' => [
 		'CSPNonce' => [
@@ -214,9 +218,27 @@
 			'hint' => 'This log displays a list of potential errors that occur as a result of your content security policy configuration.',
 		],
 		'permissionsPolicy' => [
+			'origin' => [
+				'prompt' => 'Add origin',
+				'name' => 'Origin',
+				'description' => '',
+				'comment' => '',
+			],
 			'enabled' => [
 				'label' => 'Enable the Permissions-Policy header',
 				'comment' => '<strong class="text-warning">Heads up:</strong> This is an experimental feature. <a href="https://github.com/w3c/webappsec-permissions-policy" target="_blank" rel="noopener">Learn more</a>'
+			],
+			'report_only' => [
+				'label' => 'Report Only',
+				'comment' => 'Monitor, but do not enforce the Permissions-Policy header. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy-Policy-Report-Only" target="_blank" rel="noopener">Learn more</a>',
+			],
+			'log_violations' => [
+				'label' => 'Log Violations',
+				'comment' => 'Store policy violation reports from browsers. You should also enable the Report-To header in Miscellaneous Headers, if you want to collect logs.',
+			],
+			'custom' => [
+				'label' => 'Custom Policy',
+				'comment' => 'Append this custom policy to the value generated using the features below.',
 			],
 		],
 	],

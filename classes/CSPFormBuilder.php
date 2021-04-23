@@ -405,8 +405,10 @@ class CSPFormBuilder {
 
 	const LANG_PREFIX = 'zaxbux.securityheaders::lang.fields.cspsettings.';
 
+	/*
 	public function __construct() {
 	}
+	*/
 
 	public function makeForm($widget) {
 		// upgrade-insecure-requests and block-all-mixed-content
@@ -434,7 +436,7 @@ class CSPFormBuilder {
 					$fieldName = '%s';
 				}
 
-				$widget->addTabFields([
+				$widget->addSecondaryTabFields([
 					\sprintf($fieldName, \str_replace('-', '_', $directive['name']), \str_replace('-', '_', $name)) => $config
 				]);
 			}

@@ -79,3 +79,22 @@ fields:
         comment: zaxbux.securityheaders::lang.fields.miscellaneoussettings.report_to.comment
         commentHtml: true
         span: full
+    
+    _section_feature_policy:
+        type: section
+        label: Feature-Policy
+        comment: '<span class="text-warning"><i class="icon-exclamation-triangle"></i> Deprecated</span> This header has been renamed to <code>Permissions-Policy</code>.'
+        commentHtml: true
+    
+    feature_policy:
+        type: switch
+        label: Enable
+        comment: Use the Permissions-Policy header settings to generate this header.
+        span: left
+    
+    feature_policy_report_only:
+        type: switch
+        label: zaxbux.securityheaders::lang.fields.permissionsPolicy.report_only.label
+        comment: zaxbux.securityheaders::lang.fields.permissionsPolicy.report_only.comment
+        commentHtml: true
+        span: right

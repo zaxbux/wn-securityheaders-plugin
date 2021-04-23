@@ -1,0 +1,30 @@
+fields:
+    enabled:
+        type: switch
+        label: zaxbux.securityheaders::lang.fields.permissionsPolicy.enabled.label
+        comment: zaxbux.securityheaders::lang.fields.permissionsPolicy.enabled.comment
+        commentHtml: true
+        span: full
+    
+    report_only:
+        type: switch
+        label: zaxbux.securityheaders::lang.fields.permissionsPolicy.report_only.label
+        comment: zaxbux.securityheaders::lang.fields.permissionsPolicy.report_only.comment
+        commentHtml: true
+        span: left
+
+    log_violations:
+        type: switch
+        label: zaxbux.securityheaders::lang.fields.permissionsPolicy.log_violations.label
+        comment: zaxbux.securityheaders::lang.fields.permissionsPolicy.log_violations.comment
+        span: right
+    
+    custom:
+        type: text
+        label: zaxbux.securityheaders::lang.fields.permissionsPolicy.custom.label
+        comment: zaxbux.securityheaders::lang.fields.permissionsPolicy.custom.comment
+        span: full
+    
+    _features_section:
+        type: section
+        label: Features

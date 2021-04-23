@@ -14,7 +14,7 @@ class HttpHeader {
 	 *
 	 * @return string
 	 */
-	public function getName() {
+	public function getName(): string {
 		return $this->name;
 	}
 
@@ -23,7 +23,7 @@ class HttpHeader {
 	 *
 	 * @return string
 	 */
-	public function getValue() {
+	public function getValue(): string {
 		return $this->value;
 	}
 
@@ -33,7 +33,7 @@ class HttpHeader {
 	 * @param string $name
 	 * @return HttpHeader
 	 */
-	public function setName(string $name) {
+	public function setName(string $name): HttpHeader {
 		$this->name = $name;
 
 		return $this;
@@ -45,7 +45,7 @@ class HttpHeader {
 	 * @param string $value
 	 * @return HttpHeader
 	 */
-	public function setValue(string $value) {
+	public function setValue(string $value): HttpHeader {
 		$this->value = trim($value);
 
 		return $this;

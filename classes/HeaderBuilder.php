@@ -11,11 +11,14 @@ use Zaxbux\SecurityHeaders\Models\CSPSettings;
 use Zaxbux\SecurityHeaders\Models\HSTSSettings;
 use Zaxbux\SecurityHeaders\Models\MiscellaneousHeaderSettings;
 use Zaxbux\SecurityHeaders\Http\Controllers\ReportsController;
+use Zaxbux\SecurityHeaders\Models\PermissionsPolicySettings;
 
 class HeaderBuilder {
 
 	const CACHE_KEY_CONTENT_SECURITY_POLICY   = "zaxbux_securityheaders_csp";
 	const CACHE_KEY_STRICT_TRANSPORT_SECURITY = "zaxbux_securityheaders_hsts";
+	const CACHE_KEY_PERMISSIONS_POLICY        = "zaxbux_securityheaders_permissions_policy";
+	const CACHE_KEY_FEATURE_POLICY            = "zaxbux_securityheaders_feature_policy";
 	const CACHE_KEY_REFERRER_POLICY           = "zaxbux_securityheaders_ref_policy";
 	const CACHE_KEY_FRAME_OPTIONS             = "zaxbux_securityheaders_frame_options";
 	const CACHE_KEY_CONTENT_TYPE_OPTIONS      = "zaxbux_securityheaders_content_type";
@@ -153,6 +156,131 @@ class HeaderBuilder {
 			}
 
 			return new HttpHeader('X-XSS-Protection', $value);
+		});
+
+		if ($header) {
+			$response->header($header->getName(), $header->getValue());
+		}
+	}
+
+	public static function addPermissionsPolicyHeader(Response $response): void {
+		$header = Cache::rememberForever(self::CACHE_KEY_PERMISSIONS_POLICY, function (): ?HttpHeader {
+			if (!PermissionsPolicySettings::get('enabled')) {
+				return null;
+			}
+
+			$header = new HttpHeader('Permissions-Policy');
+
+			if (PermissionsPolicySettings::get('report_only')) {
+				$header->setName('Permissions-Policy-Report-Only');
+			}
+
+			$features = [];
+
+			foreach (PermissionsPolicyFormBuilder::FEATURES as $feature) {
+				$value = PermissionsPolicySettings::get(\str_replace('-', '_', $feature));
+
+				if (!$value || (!$value['none'] && !$value['self'] && empty($value['origins']))) {
+					continue;
+				}
+
+				$features[$feature] = [];
+				
+				if ($value['none'] == true) {
+					continue;
+				}
+
+				if ($value['all'] == true) {
+					$features[$feature][] = '*';
+					continue;
+				}
+
+				if ($value['self'] == true) {
+					$features[$feature][] = 'self';
+				}
+
+				foreach ($value['origins'] as $origin) {
+					$features[$feature][] = \sprintf('"%s"', $origin['origin']);
+				}
+			}
+
+			$policy = [];
+
+			foreach ($features as $feature => $value) {
+				$policy[] = \sprintf('%s=(%s)', $feature, implode(' ', $value));
+			}
+
+			$policy[] = trim(PermissionsPolicySettings::get('custom'));
+
+			if (empty($policy)) {
+				return null;
+			}
+
+			$header->setValue(implode(', ', $policy));
+
+			return $header;
+		});
+
+		if ($header) {
+			$response->header($header->getName(), $header->getValue());
+		}
+	}
+
+	public static function addFeaturePolicyHeader(Response $response): void {
+		$header = Cache::rememberForever(self::CACHE_KEY_FEATURE_POLICY, function (): ?HttpHeader {
+			if (!MiscellaneousHeaderSettings::get('feature_policy')) {
+				return null;
+			}
+
+			$header = new HttpHeader('Feature-Policy');
+
+			if (MiscellaneousHeaderSettings::get('feature_policy_report_only')) {
+				$header->setName('Feature-Policy-Report-Only');
+			}
+
+			$features = [];
+
+			foreach (PermissionsPolicyFormBuilder::FEATURES as $feature) {
+				$value = PermissionsPolicySettings::get(\str_replace('-', '_', $feature));
+
+				if (!$value || (!$value['none'] && !$value['self'] && empty($value['origins']))) {
+					continue;
+				}
+
+				$features[$feature] = [];
+				
+				if ($value['none'] == true) {
+					$features[$feature][] = '\'none\'';
+					continue;
+				}
+
+				if ($value['all'] == true) {
+					$features[$feature][] = '*';
+					continue;
+				}
+
+				if ($value['self'] == true) {
+					$features[$feature][] = '\'self\'';
+				}
+
+				foreach ($value['origins'] as $origin) {
+					$features[$feature][] = $origin['origin'];
+				}
+			}
+
+			$policy = [];
+
+			foreach ($features as $feature => $value) {
+				$policy[] = \sprintf('%s %s', $feature, implode(' ', $value));
+			}
+
+			if (empty($policy)) {
+				return null;
+			}
+
+			$header->setValue(implode('; ', $policy));
+
+			return $header;
 		});
 
 		if ($header) {

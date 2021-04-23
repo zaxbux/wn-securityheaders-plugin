@@ -3,6 +3,7 @@
 use Backend;
 use System\Classes\PluginBase;
 use Zaxbux\SecurityHeaders\Classes\CSPFormBuilder;
+use Zaxbux\SecurityHeaders\Classes\PermissionsPolicyFormBuilder;
 
 class Plugin extends PluginBase {
 
@@ -39,6 +40,24 @@ class Plugin extends PluginBase {
 			}
 
 			$builder = new CSPFormBuilder;
+			$builder->makeForm($widget);
+		});
+
+		\Event::listen('backend.form.extendFields', function (\Backend\Widgets\Form $widget) {
+			if (!$widget->getController() instanceof \System\Controllers\Settings) {
+				return;
+			}
+
+			if (!$widget->model instanceof Models\PermissionsPolicySettings) {
+				return;
+			}
+			
+			// Avoid adding fields to the repeater type fields
+			if ($widget->isNested != false) {
+				return;
+			}
+
+			$builder = new PermissionsPolicyFormBuilder;
 			$builder->makeForm($widget);
 		});
 	}
@@ -113,13 +132,25 @@ class Plugin extends PluginBase {
 					'zaxbux.securityheaders.access_settings'
 				],
 			],
+			'permissionsPolicy' => [
+				'label'       => 'zaxbux.securityheaders::lang.settings.permissionsPolicy.label',
+				'description' => 'zaxbux.securityheaders::lang.settings.permissionsPolicy.description',
+				'category'    => 'zaxbux.securityheaders::lang.settings.category',
+				'icon'        => 'icon-shield',
+				'class'       => Models\PermissionsPolicySettings::class,
+				'order'       => 502,
+				'keywords'    => 'security headers feature-policy permissions-policy',
+				'permissions' => [
+					'zaxbux.securityheaders.access_settings'
+				],
+			],
 			'miscellaneous' => [
 				'label'       => 'zaxbux.securityheaders::lang.settings.miscellaneous.label',
 				'description' => 'zaxbux.securityheaders::lang.settings.miscellaneous.description',
 				'category'    => 'zaxbux.securityheaders::lang.settings.category',
 				'icon'        => 'icon-shield',
 				'class'       => Models\MiscellaneousHeaderSettings::class,
-				'order'       => 502,
+				'order'       => 503,
 				'keywords'    => 'security headers',
 				'permissions' => [
 					'zaxbux.securityheaders.access_settings'
@@ -131,7 +162,7 @@ class Plugin extends PluginBase {
 				'category'    => 'zaxbux.securityheaders::lang.settings.category',
 				'icon'        => 'icon-shield',
 				'url'         => Backend::url('zaxbux/securityheaders/csplogs'),
-				'order'       => 503,
+				'order'       => 504,
 				'keywords'    => 'security headers csp',
 				'permissions' => [
 					'zaxbux.securityheaders.access_settings'
