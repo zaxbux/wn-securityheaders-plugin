@@ -1,16 +1,30 @@
 {
-    "name": "zaxbux/securityheaders",
-    "description": "Easily configure HTTP response headers to increase site security.",
-    "version": "1.0.5",
-    "type": "october-plugin",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Zach Schneider",
-            "email": "hello@zacharyschneider.ca"
-        }
-    ],
-    "require": {
-        "php": "7"
-    }
+	"name": "zaxbux/securityheaders",
+	"description": "Easily configure HTTP response headers to increase site security.",
+	"version": "1.0.5",
+	"type": "winter-plugin",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Zach Schneider",
+			"email": "hello@zacharyschneider.ca"
+		}
+	],
+	"require": {
+		"php": "^7.4"
+	},
+	"minimum-stability": "stable",
+	"require-dev": {
+		"composer/installers": "dev-main@dev",
+		"winter/storm": "dev-develop@dev",
+		"winter/wn-system-module": "dev-develop@dev",
+		"winter/wn-backend-module": "dev-develop@dev",
+		"winter/wn-cms-module": "dev-develop@dev",
+		"barryvdh/laravel-ide-helper": "2.8.2"
+	},
+	"extra": {
+		"installer-paths": {
+			".winter/modules/{$name}": ["type:winter-module"]
+		}
+	}
 }
