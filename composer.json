@@ -3,7 +3,6 @@
 	"description": "Easily configure HTTP response headers to increase site security.",
 	"homepage": "https://github.com/zaxbux/wn-securityheaders-plugin",
 	"keywords": ["csp", "xss", "content security policy"],
-	"version": "1.0.5",
 	"type": "winter-plugin",
 	"license": "MIT",
 	"authors": [
