@@ -1,5 +1,10 @@
 # Security Headers
 
+![GitHub](https://img.shields.io/github/license/zaxbux/wn-securityheaders-plugin)
+![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/zaxbux/wn-securityheaders-plugin)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/zaxbux/wn-securityheaders-plugin)
+![Packagist Version](https://img.shields.io/packagist/v/zaxbux/wn-securityheaders-plugin)
+
 This Winter CMS plugin allows you to manage a variety of security HTTP headers for your application.
 
 See your score at [securityheaders.com](https://securityheaders.com/)
