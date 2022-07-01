@@ -1,7 +1,7 @@
 <?php return [
 	'plugin' => [
 		'name' => 'Security Headers',
-		'description' => ''
+		'description' => 'Configure HTTP response headers that can improve site security.'
 	],
 	'settings' => [
 		'category' => 'Security Headers',
