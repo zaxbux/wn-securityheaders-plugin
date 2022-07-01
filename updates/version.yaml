@@ -12,3 +12,5 @@
 1.0.5:
     - 'Fixed a bug with DB schema not allowing long URIs.'
     - table_modify_zaxbux_securityheaders_reporting_csp_20210407.php
+1.0.6:
+    - 'Bug fix.'
