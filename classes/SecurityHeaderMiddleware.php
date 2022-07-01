@@ -87,7 +87,7 @@ class SecurityHeaderMiddleware {
 	 * @param \Illuminate\Http\Request $request
 	 * @param \Illuminate\Http\Response $response
 	 */
-	protected function isRelevant(Request $request, Response $response): bool {
+	protected function isRelevant($request, $response): bool {
 		// Only default responses, no redirects
 		if (!$response instanceof Response) {
 			return false;
